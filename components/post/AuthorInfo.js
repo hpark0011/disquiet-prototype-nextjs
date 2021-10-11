@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Plus from '../../assets/icons/plus.svg';
-import Image from 'next/Image';
+import Image from 'next/image';
 
 const AuthorInfo = ({ username }) => {
   return (

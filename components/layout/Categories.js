@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Link from 'next/Link';
-import { useRouter } from 'next/Router';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import ArrowTriangleRight from '../../assets/icons/arrow_triangle_right.svg';
 
@@ -16,13 +16,13 @@ const Categories = ({ topics }) => {
   return (
     <Container>
       <div className='category' onClick={onCategoryClick}>
-        <ArrowTriangleRightIcon isOpen={isOpen} />
+        <ArrowTriangleRightIcon $isOpen={isOpen} />
         <div className='category-label'>Topics</div>
       </div>
-      <CategoryItems isOpen={isOpen}>
+      <CategoryItems $isOpen={isOpen}>
         <Link href={{ pathname: '/' }}>
           <CategoryItem
-            isOpen={isOpen}
+            $isOpen={isOpen}
             isActive={router.query.topic === undefined ? 'active' : ''}
           >
             🌕 전체
@@ -36,7 +36,7 @@ const Categories = ({ topics }) => {
               href={{ pathname: '/', query: { topic: `${queryString}` } }}
             >
               <CategoryItem
-                isOpen={isOpen}
+                $isOpen={isOpen}
                 isActive={router.query.topic === queryString ? 'active' : ''}
               >
                 {topicName}
@@ -81,7 +81,7 @@ const Container = styled.div`
 
 const CategoryItems = styled.div`
   margin-top: 4px;
-  max-height: ${({ isOpen }) => (isOpen ? '1000px' : '0px')};
+  max-height: ${({ $isOpen }) => ($isOpen ? '1000px' : '0px')};
   overflow: hidden;
   transition: all 0.3s ease-in-out;
 `;
@@ -99,7 +99,7 @@ const CategoryItem = styled.a`
   line-height: 1em;
   color: #707070;
   cursor: pointer;
-  opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+  opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -109,7 +109,7 @@ const CategoryItem = styled.a`
 
 const ArrowTriangleRightIcon = styled(ArrowTriangleRight)`
   fill: #c4c4c4;
-  transform: ${({ isOpen }) => (isOpen ? 'rotate(90deg)' : 'rotate(0deg)')};
+  transform: ${({ $isOpen }) => ($isOpen ? 'rotate(90deg)' : 'rotate(0deg)')};
   transition: all 0.3s ease-in-out;
 `;
 

@@ -10,6 +10,4 @@ const Layout = ({ children }) => {
   );
 };
 
-const Container = styled.div``;
-
 export default Layout;

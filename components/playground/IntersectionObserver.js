@@ -3,13 +3,11 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 
-const Playground = () => {
+const IntersectionObserver = () => {
   const node = useRef();
   const { ref, inView } = useInView();
 
-  useEffect(() => {
-    console.log('use effect hook, inview =', inView);
-  }, [inView]);
+  useEffect(() => {}, [inView]);
 
   return (
     <Container>
@@ -57,4 +55,4 @@ const Detector = styled.div`
   background-color: ${({ inView }) => (inView ? '#6d55ff' : 'red')};
 `;
 
-export default Playground;
+export default IntersectionObserver;

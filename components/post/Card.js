@@ -16,8 +16,8 @@ const Card = ({ id, ...other }) => {
   const onCardBodyClick = () => {
     onOpenModal();
     router.push({
-      pathname: './',
-      asPath: './[userId]/[postId]',
+      pathname: '/',
+      asPath: '/[userId]/[postId]',
       query: {
         userId: username,
         postId: id,

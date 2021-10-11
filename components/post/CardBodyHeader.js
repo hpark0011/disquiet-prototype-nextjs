@@ -48,7 +48,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin-right: 6px;
-    padding: 5px 8px;
+    padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
     line-height: 1em;

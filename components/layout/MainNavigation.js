@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Link from 'next/Link';
+import Link from 'next/link';
 import Search from './Search';
-import Image from 'next/Image';
+import Image from 'next/image';
 import Logo from '../../public/logo.svg';
 import NewPostIcon from '../../assets/icons/new_post.svg';
 import BellIcon from '../../assets/icons/bell_fill.svg';
@@ -39,7 +39,7 @@ const MainNavigation = () => {
               <div className='text'>새 포스트</div>
             </a>
           </Link>
-          <Link href='/profile'>
+          <Link href='/profile/posts/makerlogs'>
             <div className='profile-button'>
               <Image src={profile_photo} width='36' height='36' />
             </div>

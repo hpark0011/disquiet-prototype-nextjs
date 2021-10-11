@@ -1,55 +1,44 @@
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-const tabs = [
-  { id: 1, label: '포스트', query: 'posts' },
-  { id: 2, label: '스토리', query: 'stories' },
-  { id: 3, label: '스크랩북', query: 'scrapbook' },
-  { id: 2, label: '투표한 포스트', query: 'upvoted' },
-];
+import { useContext } from 'react';
+import { ProfileTabIndexContext } from '../../store/profile-tab-index-context';
 
 const ProfileTabs = () => {
   const router = useRouter();
+  const { tabs, tabIndex, setTabIndex } = useContext(ProfileTabIndexContext);
+
+  const onTabItemClick = (id) => {
+    setTabIndex(id);
+  };
+
   return (
-    <>
-      <TabsContainer>
-        <TabsWrapper>
-          {tabs.map((tab) => {
-            const { id, label, query } = tab;
-            return (
-              <Link key={id} href={{ pathname: '/profile/posts' }}>
-                <TabItem active={router.pathname === 'profile/posts'}>
-                  포스트
-                </TabItem>
-              </Link>
-            );
-          })}
-          <Link href={{ pathname: '/profile/posts' }}>
-            <TabItem active={router.pathname === 'profile/posts'}>
-              포스트
-            </TabItem>
-          </Link>
-          <Link href={{ pathname: '/profile/story' }}>
-            <TabItem active={router.pathname === 'profile/story'}>
-              스토리
-            </TabItem>
-          </Link>
-          <Link href={{ pathname: '/profile/scrapbook' }}>
-            <TabItem active={router.pathname === 'profile/scrapbook'}>
-              스크랩북
-            </TabItem>
-          </Link>
-          <Link href={{ pathname: '/profile/upvoted' }}>
-            <TabItem active={router.pathname === 'profile/upvoted'}>
-              투표한 포스트
-            </TabItem>
-          </Link>
-          <ActiveTabIndicator tabIndex={tabIndex} />
-        </TabsWrapper>
-      </TabsContainer>
+    <TabsContainer>
+      <TabsWrapper>
+        {tabs.map((tab) => {
+          const { id, label, query } = tab;
+          return (
+            <Link
+              key={id}
+              href={
+                query === 'posts'
+                  ? `/profile/${query}/makerlogs`
+                  : `/profile/${query}`
+              }
+            >
+              <TabItem
+                onClick={() => onTabItemClick(id)}
+                active={router.pathname.includes(query)}
+              >
+                {label}
+              </TabItem>
+            </Link>
+          );
+        })}
+        <ActiveTabIndicator tabIndex={tabIndex} />
+      </TabsWrapper>
       <Divider />
-    </>
+    </TabsContainer>
   );
 };
 
@@ -62,63 +51,47 @@ const TabsWrapper = styled.div`
   display: flex;
   position: relative;
   flex-direction: row;
-  margin-top: 2rem;
+  margin-top: 24px;
   width: 100%;
   justify-content: space-between;
+  }
 `;
 
-const activeClassName = 'tab-item-active';
-const TabItem = styled.div`
+const TabItem = styled.a`
   display: flex;
   align-items: center;
   flex-grow: 1;
   justify-content: center;
   padding: 0.875rem 0;
-  color: #c4c4c4;
-  transition: 0.2s all ease-in-out;
+  cursor: pointer;
+  font-size: 14px;
+  width: 25%;
+  position: relative;
+  z-index: 1;
+  color: ${({ active }) => (active ? '#6d55ff' : '#c4c4c4')};
 
-  &.${activeClassName} {
-    color: #6d55ff;
-  }
   &:hover {
     color: #6d55ff;
-  }
-
-  .tab-item-label {
-    margin-left: 0.25rem;
-    margin-right: 0.375rem;
-    font-size: 14px;
-    line-height: 1.1rem;
-  }
-`;
-
-const ActiveTabIndicator = styled.div`
-  width: 320px;
-  height: 2px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  position: absolute;
-  bottom: -2px;
-  transition: 0.2s left ease-in-out;
-  left: ${({ tabIndex }) => `${tabIndex * 50}%`};
   }
 `;
 
 const Divider = styled.div`
-  margin-top: 1px;
+  margin-top: -1px;
+  position: relative;
   height: 1px;
   background-color: #f5f5f7;
+  z-index: 0;
 `;
 
-const baseTabIconStyles = css`
-  cursor: pointer;
-  width: 1.25rem;
-  height: 1.25rem;
-  fill: ${({ theme, $active }) => ($active ? theme.colors.primary : '#e5e5ef')};
-  transition: 0.25s fill ease-in-out;
-
-  ${TabItem}:hover & {
-    fill: ${({ theme }) => theme.colors.primary};
-  }
+const ActiveTabIndicator = styled.div`
+  position: absolute;
+  height: 2px;
+  width: 25%;
+  background-color: #6d55ff;
+  bottom: 0;
+  z-index: 4;
+  left: ${({ tabIndex }) => `${tabIndex * 25}%`};
+  transition: all 0.2s ease-in-out;
 `;
 
 export default ProfileTabs;

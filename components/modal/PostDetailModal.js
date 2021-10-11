@@ -26,15 +26,12 @@ const Modal = ({
 
   useEffect(() => {
     setIsBrowser(true);
-    console.log('this is inveiw', inView);
   }, []);
 
   const onClosePostDetailModal = () => {
     router.push('/');
     onCloseModal();
   };
-
-  console.log('thisis title:::', title);
 
   const modalContent = isModalOpen ? (
     <ModalOverlay onClick={onClosePostDetailModal}>

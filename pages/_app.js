@@ -1,11 +1,18 @@
 import '../styles/globals.css';
 import Layout from '../components/layout/Layout';
+import Head from 'next/head';
+import { ProfileTabIndexProvider } from '../store/profile-tab-index-context';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ProfileTabIndexProvider>
+      <Layout>
+        <Head>
+          <title>Disquiet Makerlog Prototype</title>
+        </Head>
+        <Component {...pageProps} />
+      </Layout>
+    </ProfileTabIndexProvider>
   );
 }
 

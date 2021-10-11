@@ -26,7 +26,6 @@ const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
   };
 
   const onSubmit = (data) => {
-    console.log('this is a data onsubmit:::', data);
     reset();
   };
 

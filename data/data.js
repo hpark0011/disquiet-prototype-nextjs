@@ -90,4 +90,42 @@ const makerlogs = [
   },
 ];
 
-export { makerlogs };
+const myMakerlogs = [
+  {
+    id: 1,
+    title: '나의 메이커 로그1',
+    content: '메이커로그 컨텐츠 1',
+    date: '10월 17일 2021년',
+    tags: ['제품 런칭', '인사이트'],
+  },
+  {
+    id: 2,
+    title: '나의 메이커 로그1',
+    content: '메이커로그 컨텐츠 1',
+    date: '10월 17일 2021년',
+    tags: ['제품 런칭', '인사이트'],
+  },
+  {
+    id: 3,
+    title: '나의 메이커 로그1',
+    content: '메이커로그 컨텐츠 1',
+    date: '10월 17일 2021년',
+    tags: ['제품 런칭', '인사이트'],
+  },
+  {
+    id: 4,
+    title: '나의 메이커 로그1',
+    content: '메이커로그 컨텐츠 1',
+    date: '10월 17일 2021년',
+    tags: ['제품 런칭', '인사이트'],
+  },
+  {
+    id: 5,
+    title: '나의 메이커 로그1',
+    content: '메이커로그 컨텐츠 1',
+    date: '10월 17일 2021년',
+    tags: ['제품 런칭', '인사이트'],
+  },
+];
+
+export { makerlogs, myMakerlogs };

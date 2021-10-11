@@ -102,7 +102,7 @@ const FooterDivider = styled.p`
   font-size: 0.5rem;
   line-height: 1em;
   text-decoration: none;
-  color: 88ee8e;
+  color: #8e8e8e;
   margin: 0 0.125rem;
 `;
 
