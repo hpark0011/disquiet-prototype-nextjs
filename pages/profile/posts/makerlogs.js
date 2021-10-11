@@ -10,17 +10,16 @@ import { useState, useEffect } from 'react';
 export { getStaticProps };
 
 const ProfilePosts = ({ topics, trendingProducts }) => {
-  const [makerlogs, setMakerlogs] = useState(null);
+  const [myMakerlogs, setMyMakerlogs] = useState(null);
 
   useEffect(() => {
-    const getMakerlogs = async () => {
+    const getMyMakerlogs = async () => {
       const response = await fetch('http://localhost:4000/myMakerlogs');
       const data = await response.json();
-      console.log('data:::', data);
-      setMakerlogs(data);
+      setMyMakerlogs(data);
     };
 
-    getMakerlogs();
+    getMyMakerlogs();
   }, []);
 
   return (
@@ -28,7 +27,7 @@ const ProfilePosts = ({ topics, trendingProducts }) => {
       <MainLayout topics={topics} trendingProducts={trendingProducts}>
         <ProfileDetailInfo />
         <ProfileTabs />
-        <MyPosts postType={'makerlogs'} data={makerlogs} />
+        <MyPosts postType={'makerlogs'} data={myMakerlogs} />
       </MainLayout>
     </PageContainer>
   );

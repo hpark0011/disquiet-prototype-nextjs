@@ -7,22 +7,26 @@ const MyMakerlogs = ({ makerlogs }) => {
       {makerlogs &&
         makerlogs.map((makerlog) => {
           const { id, title, content, date, tags } = makerlog;
+          const lastItem = makerlogs.at(-1).id;
+
           return (
             <div key={id} className='makerlog'>
               <div className='date'>{date}</div>
               <div className='timeline-graph'>
-                <div className='line' />
+                <Line $lastItem={lastItem === id} />
               </div>
               <div className='card-wrapper'>
                 <div className='tags'>
-                  {tags.map((index, tag) => {
-                    <div key={index} className='tag'>
-                      {tag}
-                    </div>;
+                  {tags.map((tag) => {
+                    const { id, label, slug } = tag;
+                    return (
+                      <Tag slug={slug} key={id} className='tag'>
+                        {label}
+                      </Tag>
+                    );
                   })}
                 </div>
-                <MyCard />
-                <div className='card'></div>
+                <MyCard title={title} content={content} />
               </div>
             </div>
           );
@@ -35,7 +39,6 @@ const MyMakerlogsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 16px;
 
   .makerlog {
     display: flex;
@@ -50,6 +53,7 @@ const MyMakerlogsContainer = styled.div`
     line-height: 1em;
     margin-right: 8px;
     width: 60px;
+    font-family: 'Helvetica Neue';
   }
 
   .timeline-graph {
@@ -61,13 +65,29 @@ const MyMakerlogsContainer = styled.div`
     position: relative;
   }
 
-  .line {
-    width: 2px;
-    height: 100%;
-    background-color: #f5f5f7;
+  .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 16px;
+    padding-bottom: 40px;
+    width: 100%;
   }
 
-  .line::before {
+  .tags {
+    display: flex;
+    margin-top: -4px;
+    margin-bottom: 12px;
+  }
+`;
+
+const Line = styled.div`
+  width: 2px;
+  height: 100%;
+  background-color: ${({ $lastItem }) =>
+    $lastItem ? 'transparent' : '#f5f5f7'};
+
+  &:before {
     content: '';
     display: flex;
     width: 6px;
@@ -80,37 +100,16 @@ const MyMakerlogsContainer = styled.div`
     top: 0;
     left: 0px;
   }
+`;
 
-  .card-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 16px;
-    padding-bottom: 24px;
-  }
-
-  .tags {
-    display: flex;
-    margin-top: -4px;
-    margin-bottom: 12px;
-  }
-
-  .tag {
-    font-size: 12px;
-    line-height: 1em;
-    padding: 4px 8px;
-    background: #e9f7f5;
-    border-radius: 32px;
-    color: #20ab98;
-    margin-right: 6px;
-  }
-
-  .card {
-    width: 516px;
-    height: 580px;
-    background-color: #f5f5f7;
-    border-radius: 24px;
-  }
+const Tag = styled.div`
+  font-size: 12px;
+  line-height: 1em;
+  padding: 4px 8px;
+  background: #e9f7f5;
+  border-radius: 32px;
+  color: #20ab98;
+  margin-right: 6px;
 `;
 
 export default MyMakerlogs;

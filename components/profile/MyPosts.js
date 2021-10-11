@@ -6,21 +6,23 @@ import MyProducts from './MyProducts';
 const Posts = ({ postType, error, data }) => {
   return (
     <PostsContainer>
-      <div className='posts-header'>
-        <div className='title-wrapper'>
-          메이커일지
-          <ArrowTriangleDownIcon />
+      <div className='my-posts-sticky-wrapper'>
+        <div className='posts-header'>
+          <div className='title-wrapper'>
+            메이커일지
+            <ArrowTriangleDownIcon />
+          </div>
+          <div className='button'>새 포스트</div>
         </div>
-        <div className='button'>새 포스트</div>
-      </div>
-      <div className='filters'>
-        <div className='filter'>
-          2021년
-          <ArrowTriangleDownIcon $isColor />
-        </div>
-        <div className='filter'>
-          전체
-          <ArrowTriangleDownIcon $isColor />
+        <div className='filters'>
+          <div className='filter'>
+            2021년
+            <ArrowTriangleDownIcon $isColor />
+          </div>
+          <div className='filter'>
+            전체
+            <ArrowTriangleDownIcon $isColor />
+          </div>
         </div>
       </div>
       {!data && <div>loading...</div>}
@@ -31,9 +33,21 @@ const Posts = ({ postType, error, data }) => {
 };
 
 const PostsContainer = styled.div`
-  margin-top: 32px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  height: 100vh;
+
+  .my-posts-sticky-wrapper {
+    position: sticky;
+    padding-top: 32px;
+    margin-bottom: 8px;
+    top: 48px;
+    z-index: 2;
+    padding-bottom: 12px;
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
 
   .posts-header {
     display: flex;
@@ -53,7 +67,6 @@ const PostsContainer = styled.div`
   .button {
     display: flex;
     align-items: center;
-    margin: 0 8px 0 6px;
     padding: 6px 12px;
     border-radius: 32px;
     color: #6d55ff;
@@ -72,7 +85,7 @@ const PostsContainer = styled.div`
   }
 
   .filters {
-    margin-top: 16px;
+    margin-top: 8px;
     display: flex;
   }
   .filter {
