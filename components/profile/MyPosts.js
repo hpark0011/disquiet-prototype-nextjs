@@ -25,9 +25,8 @@ const Posts = ({ postType, error, data }) => {
           </div>
         </div>
       </div>
-      {!data && <div>loading...</div>}
-      {postType === 'makerlogs' && <MyMakerlogs makerlogs={data} />}
-      {postType === 'myProducts' && <MyProducts products={data} />}
+      {postType === 'makerlogs' && <MyMakerlogs myMakerlogs={data} />}
+      {postType === 'myProducts' && <MyProducts myProducts={data} />}
     </PostsContainer>
   );
 };

@@ -8,7 +8,12 @@ const CardBodyHeader = ({ upvote, tags, title }) => {
       <div className='tag-button-wrapper'>
         <div className='tags'>
           {tags.map((tag) => {
-            return <div className={`tag ${tag}`}>{tag}</div>;
+            const { id, label, slug } = tag;
+            return (
+              <div key={id} className={`tag ${label}`}>
+                {label}
+              </div>
+            );
           })}
         </div>
         <UpvoteButtonSmall upvote={upvote} />

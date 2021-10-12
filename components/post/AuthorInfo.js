@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import Plus from '../../assets/icons/plus.svg';
 import Image from 'next/image';
 
-const AuthorInfo = ({ username }) => {
+const AuthorInfo = ({ user }) => {
   return (
     <Container>
       <label className='label'>메이커 소개</label>
       <div className='author-card-wrapper'>
-        <img className='profile-image' src={username.profileImage}></img>
+        <img className='profile-image' src={user.profileImage}></img>
         <div className='profile-description-wrapper'>
-          <div className='username'>{username.name}</div>
+          <div className='username'>{user.name}</div>
           <div className='user-role-wrapper'>
-            <span className='user-role'>디자이너</span>{' '}
-            <span className='user-role'>@디스콰이엇</span>
+            <span className='user-role'>{user.role}</span>{' '}
+            <span className='user-role'>@{user.at}</span>
           </div>
           <div className='user-description'>
             디스콰이엇을 만들고 있습니다. 제품 만드는걸 좋아하고 무엇인가를

@@ -3,13 +3,16 @@ import FeedHeader from './FeedHeader';
 import Card from '../post/Card';
 
 const Feeds = ({ topics, makerlogs }) => {
+  
   return (
     <Container>
       <FeedHeader topics={topics} />
-      {makerlogs.map((makerlog) => {
-        const { id, ...other } = makerlog;
-        return <Card key={id} id={id} {...other} />;
-      })}
+      {!makerlogs && <div>loading...</div>}
+      {makerlogs &&
+        makerlogs.map((makerlog) => {
+          const { id, ...other } = makerlog;
+          return <Card key={id} id={id} {...other} />;
+        })}
     </Container>
   );
 };

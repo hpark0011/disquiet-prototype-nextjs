@@ -13,11 +13,13 @@ import { useInView } from 'react-intersection-observer';
 const Modal = ({
   isModalOpen,
   onCloseModal,
-  username,
+  user,
   tags,
   upvote,
   content,
   title,
+  date,
+  currentPageRoute,
 }) => {
   const { ref, inView } = useInView();
   const [isBrowser, setIsBrowser] = useState(false);
@@ -29,7 +31,7 @@ const Modal = ({
   }, []);
 
   const onClosePostDetailModal = () => {
-    router.push('/');
+    router.push(currentPageRoute);
     onCloseModal();
   };
 
@@ -38,7 +40,12 @@ const Modal = ({
       <div className='sticky-wrapper'>
         <div className='modal-container'>
           <div className='modal-header' ref={ref}>
-            <CardHeader noMargin={true} lightFont={true} username={username} />
+            <CardHeader
+              noMargin={true}
+              lightFont={true}
+              user={user}
+              date={date}
+            />
             <StyledCloseRoundedIcon onClick={onClosePostDetailModal} />
           </div>
           <div className='modal-wrapper' onClick={(e) => e.stopPropagation()}>
@@ -47,14 +54,19 @@ const Modal = ({
               {title ? <div className='title'>{title}</div> : ''}
               <div className='content-header'>
                 <div className='tags-wrapper'>
-                  {tags.map((tag) => (
-                    <div className={`tag ${tag}`}>{tag}</div>
-                  ))}
+                  {tags.map((tag) => {
+                    const { id, label, slug } = tag;
+                    return (
+                      <div key={id} className={`tag ${label}`}>
+                        {label}
+                      </div>
+                    );
+                  })}
                 </div>
                 <UpvoteButtonSmall upvote={upvote} />
               </div>
               <div className='content'>{content}</div>
-              <AuthorInfo username={username} />
+              <AuthorInfo user={user} />
               <CommentSection />
             </div>
           </div>

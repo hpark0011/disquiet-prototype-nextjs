@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
-const CardHeader = ({ username, noMargin, lightFont }) => {
+const CardHeader = ({ user, noMargin, lightFont, date }) => {
   return (
     <Container noMargin={noMargin}>
-      <img className='profile-image' src={username.profileImage} />
+      <img className='profile-image' src={user.profileImage} />
       <div className='description-wrapper'>
         <PostDescription lightFont={lightFont}>
-          <span className='username'>{username.name}</span>
+          <span className='username'>{user.name}</span>
           님이 &nbsp;
           <span className='post-type'>메이커일지</span>를 공유하였습니다.
         </PostDescription>
         <ProfileDescription lightFont={lightFont}>
-          <div>메이커</div> @디스콰이엇 <div className='divider'>•</div>
-          <div>8월 24일</div>
+          <div>{user.role}</div> &nbsp; @{user.at}{' '}
+          <div className='divider'>•</div>
+          <div className='date'>{date}</div>
         </ProfileDescription>
       </div>
     </Container>
@@ -81,6 +82,10 @@ const ProfileDescription = styled.div`
   font-size: 12px;
   line-height: 12px;
   color: ${({ lightFont }) => (lightFont ? '#e5e5e8' : '#8e8e8e')};
+
+  .date {
+    font-family: 'Helvetica Neue';
+  }
 `;
 
 export default CardHeader;

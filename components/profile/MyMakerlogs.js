@@ -1,13 +1,22 @@
 import styled from 'styled-components';
 import MyCard from './MyCard';
 
-const MyMakerlogs = ({ makerlogs }) => {
+const myProfile = {
+  id: 'hpark',
+  name: 'Hyunsol',
+  profileImage: 'https://randomuser.me/api/portraits/men/84.jpg',
+  role: '디자이너',
+  at: '디스콰이엇',
+};
+
+const MyMakerlogs = ({ myMakerlogs }) => {
   return (
     <MyMakerlogsContainer>
-      {makerlogs &&
-        makerlogs.map((makerlog) => {
-          const { id, title, content, date, tags } = makerlog;
-          const lastItem = makerlogs.at(-1).id;
+      {!myMakerlogs && <div>loading...</div>}
+      {myMakerlogs &&
+        myMakerlogs.map((myMakerlog) => {
+          const { id, title, content, date, tags, upvote } = myMakerlog;
+          const lastItem = myMakerlogs.at(-1).id;
 
           return (
             <div key={id} className='makerlog'>
@@ -26,7 +35,14 @@ const MyMakerlogs = ({ makerlogs }) => {
                     );
                   })}
                 </div>
-                <MyCard title={title} content={content} />
+                <MyCard
+                  id={id}
+                  title={title}
+                  content={content}
+                  user={myProfile}
+                  tags={tags}
+                  upvote={upvote}
+                />
               </div>
             </div>
           );

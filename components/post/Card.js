@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useModal from '../../hook/useModal';
 import PostDetailModal from '../modal/PostDetailModal';
@@ -11,7 +10,7 @@ const Card = ({ id, ...other }) => {
   const [isModalOpen, onOpenModal, onCloseModal] = useModal();
 
   const makerlog = { ...other };
-  const { title, content, date, username, tags, upvote } = makerlog;
+  const { title, content, date, user, tags, upvote, topics } = makerlog;
 
   const onCardBodyClick = () => {
     onOpenModal();
@@ -19,7 +18,7 @@ const Card = ({ id, ...other }) => {
       pathname: '/',
       asPath: '/[userId]/[postId]',
       query: {
-        userId: username,
+        userId: user.name,
         postId: id,
       },
     });
@@ -27,7 +26,7 @@ const Card = ({ id, ...other }) => {
 
   return (
     <Container>
-      <CardHeader username={username} />
+      <CardHeader user={user} date={date} />
       <CardBody
         title={title}
         tags={tags}
@@ -36,13 +35,15 @@ const Card = ({ id, ...other }) => {
         content={content}
       />
       <PostDetailModal
-        username={username}
+        user={user}
         isModalOpen={isModalOpen}
         onCloseModal={onCloseModal}
         tags={tags}
         upvote={upvote}
         content={content}
         title={title}
+        date={date}
+        currentPageRoute={router.pathname}
       />
     </Container>
   );

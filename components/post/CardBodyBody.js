@@ -58,10 +58,6 @@ const Container = styled.div`
       line-height: 1em;
       color: #6d55ff;
     }
-
-    &:hover {
-      background-color: #fdfdfd;
-    }
   }
 `;
 
