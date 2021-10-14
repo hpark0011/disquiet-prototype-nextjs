@@ -15,6 +15,6 @@ module.exports = {
     ];
   },
   images: {
-    domains: ['media.graphcms.com'],
+    domains: ['media.graphcms.com', 'randomuser.me'],
   },
 };

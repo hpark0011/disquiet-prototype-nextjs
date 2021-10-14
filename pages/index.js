@@ -1,30 +1,16 @@
 import styled from 'styled-components';
 import Feeds from '../components/home/Feeds';
 import FeedEntry from '../components/home/FeedEntry';
-// import { makerlogs } from '../data/data';
-import MainLayout, { getStaticProps } from '../components/layout/MainLayout';
-import { useEffect, useState } from 'react';
+import MainLayout from '../components/layout/MainLayout';
+import { GraphQLClient } from 'graphql-request';
+import { GET_TRENDING_PRODUCTS } from '../graphql/posts';
 
-export { getStaticProps };
-
-const HomePage = ({ topics, trendingProducts }) => {
-  const [makerlogs, setMakerlogs] = useState(null);
-
-  useEffect(() => {
-    const getMakerlogs = async () => {
-      const response = await fetch('http://localhost:4000/makerlogs');
-      const data = await response.json();
-      setMakerlogs(data);
-    };
-
-    getMakerlogs();
-  }, []);
-
+const HomePage = ({ trendingProducts, makerlogs }) => {
   return (
     <PageContainer>
-      <MainLayout topics={topics} trendingProducts={trendingProducts}>
+      <MainLayout trendingProducts={trendingProducts}>
         <FeedEntry />
-        <Feeds topics={topics} makerlogs={makerlogs} />
+        <Feeds makerlogs={makerlogs} />
       </MainLayout>
     </PageContainer>
   );
@@ -36,3 +22,33 @@ const PageContainer = styled.div`
 `;
 
 export default HomePage;
+
+export const getStaticProps = async () => {
+  // fetch trending products data
+  const url = process.env.ENDPOINT;
+  const graphQLClient = new GraphQLClient(url, {
+    headers: {
+      Authorization: process.env.GRAPH_CMS_TOKEN,
+    },
+  });
+
+  const trendingProductsData = await graphQLClient.request(
+    GET_TRENDING_PRODUCTS
+  );
+  const trendingProducts = trendingProductsData.trendingProducts.sort(
+    (a, b) => {
+      return a.rank - b.rank;
+    }
+  );
+
+  // fetch makerlogs data
+  const response = await fetch('http://localhost:4000/makerlogs');
+  const makerlogs = await response.json();
+
+  return {
+    props: {
+      trendingProducts,
+      makerlogs,
+    },
+  };
+};

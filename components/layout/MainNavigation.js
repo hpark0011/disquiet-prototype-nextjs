@@ -40,9 +40,14 @@ const MainNavigation = () => {
             </a>
           </Link>
           <Link href='/profile/posts/makerlogs'>
-            <div className='profile-button'>
-              <Image src={profile_photo} width='36' height='36' />
-            </div>
+            <a className='profile-button'>
+              <Image
+                alt='profile photo'
+                src={profile_photo}
+                width='36'
+                height='36'
+              />
+            </a>
           </Link>
         </nav>
       </div>

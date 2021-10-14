@@ -114,7 +114,7 @@ const Line = styled.div`
     position: absolute;
     float: left;
     top: 0;
-    left: 0px;
+    left: -1px;
   }
 `;
 

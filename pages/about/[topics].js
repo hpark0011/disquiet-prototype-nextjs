@@ -4,8 +4,8 @@ const MakerlogsByCategory = ({ makerlogs }) => {
   return (
     <Container>
       {makerlogs.map((makerlog) => {
-        const { title } = makerlog;
-        return <div>{title}</div>;
+        const { title, id } = makerlog;
+        return <div key={id}>{title}</div>;
       })}
     </Container>
   );

@@ -10,7 +10,12 @@ const FeedEntry = () => {
     <Container>
       <Link href='/profile'>
         <a className='profile-button'>
-          <Image src={profile_photo} width='48' height='48' />
+          <Image
+            alt='profile-image'
+            src={profile_photo}
+            width='48'
+            height='48'
+          />
         </a>
       </Link>
       <div className='right-cluster-wrapper'>

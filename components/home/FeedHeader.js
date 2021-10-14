@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import { useRouter } from 'next/Router';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { TopicsContext } from '../../store/topic-context';
 
-const FeedHeader = ({ topics }) => {
+const FeedHeader = () => {
+  const { topics } = useContext(TopicsContext);
   const router = useRouter();
   const currentTopic = router.query.topic;
   const currentTopicName = currentTopic

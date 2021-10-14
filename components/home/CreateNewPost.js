@@ -9,7 +9,7 @@ const CreateNewPost = () => {
 
   return (
     <>
-      <Link href='/' as='/create-post'>
+      <Link href='/' as='/create-post' passHref>
         <CreatePostContainer onClick={onOpenModal}>
           <div className='text'>프로덕트 빌딩 과정을 기록해보세요.</div>
           <div className='button-circular'>

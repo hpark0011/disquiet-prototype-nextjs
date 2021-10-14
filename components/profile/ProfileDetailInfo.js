@@ -8,7 +8,12 @@ const ProfileDetailInfo = () => {
     <Container>
       <div className='profile-image-wrapper'>
         <div className='profile-image'>
-          <Image src={profile_photo} width='96px' height='96px' />
+          <Image
+            alt='profile photo'
+            src={profile_photo}
+            width='96px'
+            height='96px'
+          />
         </div>
       </div>
       <div className='profile-content-wrapper'>

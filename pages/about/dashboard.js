@@ -8,7 +8,7 @@ const fetcher = async () => {
   return data;
 };
 
-const dashboard = () => {
+const Dashboard = () => {
   const { data, error } = useSWR('dashboard', fetcher);
 
   error && 'an error has occured';
@@ -32,4 +32,4 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default dashboard;
+export default Dashboard;

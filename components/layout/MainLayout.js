@@ -1,48 +1,14 @@
 import styled from 'styled-components';
-import { GraphQLClient } from 'graphql-request';
-import { GET_TOPICS } from '../../graphql/topics';
-import { GET_TRENDING_PRODUCTS } from '../../graphql/posts';
 import Categories from './Categories';
 import NewsLetter from './NewsLetter';
 import TrendingProducts from './TrendingProducts';
 import Footer from './Footer';
 
-export const getStaticProps = async () => {
-  const url = process.env.ENDPOINT;
-
-  const graphQLClient = new GraphQLClient(url, {
-    headers: {
-      Authorization: process.env.GRAPH_CMS_TOKEN,
-    },
-  });
-
-  const topicsData = await graphQLClient.request(GET_TOPICS);
-  const trendingProductsData = await graphQLClient.request(
-    GET_TRENDING_PRODUCTS
-  );
-
-  const topics = topicsData.topics.sort((a, b) => {
-    return a.displayOrder - b.displayOrder;
-  });
-  const trendingProducts = trendingProductsData.trendingProducts.sort(
-    (a, b) => {
-      return a.rank - b.rank;
-    }
-  );
-
-  return {
-    props: {
-      topics,
-      trendingProducts,
-    },
-  };
-};
-
-const MainLayout = ({ children, topics, trendingProducts }) => {
+const MainLayout = ({ children, trendingProducts }) => {
   return (
     <MainLayoutContainer>
       <div className='topics'>
-        <Categories topics={topics} />
+        <Categories />
       </div>
       <div className='content'>{children}</div>
       <div className='bulletin-board'>

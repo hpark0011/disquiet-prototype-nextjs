@@ -25,6 +25,7 @@ const ProfileTabs = () => {
                   ? `/profile/${query}/makerlogs`
                   : `/profile/${query}`
               }
+              passHref
             >
               <TabItem
                 onClick={() => onTabItemClick(id)}

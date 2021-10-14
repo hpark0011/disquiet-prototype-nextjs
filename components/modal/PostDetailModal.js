@@ -12,7 +12,7 @@ import { useInView } from 'react-intersection-observer';
 
 const Modal = ({
   isModalOpen,
-  onCloseModal,
+  setIsModalOpen,
   user,
   tags,
   upvote,
@@ -30,14 +30,16 @@ const Modal = ({
     setIsBrowser(true);
   }, []);
 
-  const onClosePostDetailModal = () => {
-    router.push(currentPageRoute);
-    onCloseModal();
+  const onClosePostDetailModal = (e) => {
+    e.preventDefault();
+    router.push(currentPageRoute, undefined, { shallow: false });
+    setIsModalOpen(false);
+    setIsBrowser(false);
   };
 
   const modalContent = isModalOpen ? (
     <ModalOverlay onClick={onClosePostDetailModal}>
-      <div className='sticky-wrapper'>
+      <ModalWrapper>
         <div className='modal-container'>
           <div className='modal-header' ref={ref}>
             <CardHeader
@@ -71,9 +73,20 @@ const Modal = ({
             </div>
           </div>
         </div>
-      </div>
+      </ModalWrapper>
     </ModalOverlay>
   ) : null;
+
+  console.log('modal content:::', !!modalContent);
+
+  // if (!!modalContent) {
+  //   return ReactDOM.createPortal(
+  //     modalContent,
+  //     document.getElementById('modal-root')
+  //   );
+  // } else {
+  //   return null;
+  // }
 
   if (isBrowser) {
     return ReactDOM.createPortal(
@@ -218,6 +231,13 @@ const ModalOverlay = styled.div`
     word-break: keep-all;
     margin-bottom: 32px;
   }
+`;
+
+const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
 `;
 
 const StyledCloseRoundedIcon = styled(CloseRoundedIcon)`

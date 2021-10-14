@@ -1,9 +1,17 @@
 import styled from 'styled-components';
+import Image from 'next/image';
 
 const CardHeader = ({ user, noMargin, lightFont, date }) => {
   return (
     <Container noMargin={noMargin}>
-      <img className='profile-image' src={user.profileImage} />
+      <div className='profile-image'>
+        <Image
+          alt='profile image'
+          src={user.profileImage}
+          width='40'
+          height='40'
+        />
+      </div>
       <div className='description-wrapper'>
         <PostDescription lightFont={lightFont}>
           <span className='username'>{user.name}</span>
@@ -31,6 +39,7 @@ const Container = styled.div`
     background-color: #f5f5f7;
     border-radius: 4rem;
     margin-right: 12px;
+    overflow: hidden;
   }
 
   .description-wrapper {

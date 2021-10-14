@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ArrowTriangleRight from '../../assets/icons/arrow_triangle_right.svg';
+import { TopicsContext } from '../../store/topic-context';
 
-const Categories = ({ topics }) => {
+const Categories = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);
 
   const onCategoryClick = () => {
     setIsOpen(!isOpen);
   };
 
-  const router = useRouter();
+  const { topics } = useContext(TopicsContext);
 
   return (
     <Container>
@@ -20,7 +22,7 @@ const Categories = ({ topics }) => {
         <div className='category-label'>Topics</div>
       </div>
       <CategoryItems $isOpen={isOpen}>
-        <Link href={{ pathname: '/' }}>
+        <Link href='/'>
           <CategoryItem
             $isOpen={isOpen}
             isActive={router.query.topic === undefined ? 'active' : ''}

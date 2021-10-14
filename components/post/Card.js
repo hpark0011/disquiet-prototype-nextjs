@@ -2,26 +2,25 @@ import styled from 'styled-components';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import { useRouter } from 'next/router';
-import useModal from '../../hook/useModal';
 import PostDetailModal from '../modal/PostDetailModal';
+import { useState } from 'react';
+import Link from 'next/link';
 
 const Card = ({ id, ...other }) => {
   const router = useRouter();
-  const [isModalOpen, onOpenModal, onCloseModal] = useModal();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    router.push('/', `/${user.name}/${id}`, { shallow: true });
+    setIsModalOpen(true);
+  };
 
   const makerlog = { ...other };
   const { title, content, date, user, tags, upvote, topics } = makerlog;
 
   const onCardBodyClick = () => {
-    onOpenModal();
-    router.push({
-      pathname: '/',
-      asPath: '/[userId]/[postId]',
-      query: {
-        userId: user.name,
-        postId: id,
-      },
-    });
+    openModal();
   };
 
   return (
@@ -37,7 +36,7 @@ const Card = ({ id, ...other }) => {
       <PostDetailModal
         user={user}
         isModalOpen={isModalOpen}
-        onCloseModal={onCloseModal}
+        setIsModalOpen={setIsModalOpen}
         tags={tags}
         upvote={upvote}
         content={content}

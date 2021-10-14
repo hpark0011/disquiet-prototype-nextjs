@@ -7,7 +7,14 @@ const AuthorInfo = ({ user }) => {
     <Container>
       <label className='label'>메이커 소개</label>
       <div className='author-card-wrapper'>
-        <img className='profile-image' src={user.profileImage}></img>
+        <div className='profile-image'>
+          <Image
+            alt='profile image'
+            src={user.profileImage}
+            width='64'
+            height='64'
+          />
+        </div>
         <div className='profile-description-wrapper'>
           <div className='username'>{user.name}</div>
           <div className='user-role-wrapper'>
@@ -71,6 +78,7 @@ const Container = styled.div`
     background: #fdcd66;
     margin-right: 16px;
     border-radius: 64px;
+    overflow: hidden;
   }
 
   .profile-description-wrapper {

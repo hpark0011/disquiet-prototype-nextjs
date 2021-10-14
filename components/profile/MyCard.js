@@ -1,24 +1,36 @@
 import styled from 'styled-components';
 import CardBodyBody from '../post/CardBodyBody';
 import CardBodyFooter from '../post/CardBodyFooter';
-import useModal from '../../hook/useModal';
+// import useModal from '../../hook/useModal';
 import PostDetailModal from '../modal/PostDetailModal';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const MyCard = ({ id, title, content, user, tags, upvote }) => {
   const router = useRouter();
-  const [isModalOpen, onOpenModal, onCloseModal] = useModal();
+  // const [isModalOpen, onOpenModal, onCloseModal] = useModal();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    router.push('/profile/posts/makerlogs', `/${user.name}/${id}`);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const onMyCardBodyClick = () => {
-    onOpenModal();
-    router.push({
-      pathname: '/profile/posts/makerlogs',
-      asPath: '/[userId]/[postId]',
-      query: {
-        userId: user.name,
-        postId: id,
-      },
-    });
+    openModal();
+    // router.push({
+    //   pathname: '/profile/posts/makerlogs',
+    //   asPath: '/[userId]/[postId]',
+    //   query: {
+    //     userId: user.name,
+    //     postId: id,
+    //   },
+    // });
   };
 
   return (
@@ -29,7 +41,7 @@ const MyCard = ({ id, title, content, user, tags, upvote }) => {
       <PostDetailModal
         user={user}
         isModalOpen={isModalOpen}
-        onCloseModal={onCloseModal}
+        setIsModalOpen={setIsModalOpen}
         tags={tags}
         upvote={upvote}
         content={content}

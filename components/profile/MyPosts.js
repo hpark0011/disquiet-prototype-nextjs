@@ -9,7 +9,8 @@ const Posts = ({ postType, error, data }) => {
       <div className='my-posts-sticky-wrapper'>
         <div className='posts-header'>
           <div className='title-wrapper'>
-            메이커일지
+            {postType === 'myMakerlogs' && '메이커로그'}
+            {postType === 'myProducts' && '프로덕트'}
             <ArrowTriangleDownIcon />
           </div>
           <div className='button'>새 포스트</div>
@@ -25,7 +26,7 @@ const Posts = ({ postType, error, data }) => {
           </div>
         </div>
       </div>
-      {postType === 'makerlogs' && <MyMakerlogs myMakerlogs={data} />}
+      {postType === 'myMakerlogs' && <MyMakerlogs myMakerlogs={data} />}
       {postType === 'myProducts' && <MyProducts myProducts={data} />}
     </PostsContainer>
   );

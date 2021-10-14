@@ -42,9 +42,9 @@ export default class MyDocument extends Document {
           ></link>
         </Head>
         <body>
+          <div id='modal-root'></div>
           <Main />
           <NextScript />
-          <div id='modal-root'></div>
         </body>
       </Html>
     );

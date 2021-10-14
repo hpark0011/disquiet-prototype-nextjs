@@ -13,7 +13,7 @@ const CardBody = ({ content, upvote, title, tags, onCardBodyClick }) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.a`
   display: flex;
   flex-direction: column;
   padding: 1rem;

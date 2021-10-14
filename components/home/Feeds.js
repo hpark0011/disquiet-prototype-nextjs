@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import FeedHeader from './FeedHeader';
 import Card from '../post/Card';
 
-const Feeds = ({ topics, makerlogs }) => {
-  
+const Feeds = ({ makerlogs }) => {
   return (
     <Container>
-      <FeedHeader topics={topics} />
+      <FeedHeader />
       {!makerlogs && <div>loading...</div>}
       {makerlogs &&
         makerlogs.map((makerlog) => {
