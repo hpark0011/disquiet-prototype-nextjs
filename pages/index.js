@@ -4,14 +4,24 @@ import FeedEntry from '../components/home/FeedEntry';
 import MainLayout from '../components/layout/MainLayout';
 import { GraphQLClient } from 'graphql-request';
 import { GET_TRENDING_PRODUCTS } from '../graphql/posts';
+import PostDetailModal from '../components/modal/PostDetailModal';
+import { useRouter } from 'next/router';
+import PostDetailContent from '../components/modal/PostDetailContent';
 
 const HomePage = ({ trendingProducts, makerlogs }) => {
+  const router = useRouter();
+
   return (
     <PageContainer>
       <MainLayout trendingProducts={trendingProducts}>
         <FeedEntry />
         <Feeds makerlogs={makerlogs} />
       </MainLayout>
+      <PostDetailModal
+        isModalOpen={!!router.query.makerlogId}
+        currentPageRoute={router.pathname}
+        makerlogId={router.query.makerlogId}
+      />
     </PageContainer>
   );
 };

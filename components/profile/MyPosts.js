@@ -3,7 +3,7 @@ import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 import MyMakerlogs from './MyMakerlogs';
 import MyProducts from './MyProducts';
 
-const Posts = ({ postType, error, data }) => {
+const MyPosts = ({ postType, error, data }) => {
   return (
     <PostsContainer>
       <div className='my-posts-sticky-wrapper'>
@@ -107,4 +107,4 @@ const ArrowTriangleDownIcon = styled(ArrowTriangleDown)`
   fill: ${({ $isColor }) => ($isColor ? '#6d55ff' : '#c4c4c4')};
 `;
 
-export default Posts;
+export default MyPosts;

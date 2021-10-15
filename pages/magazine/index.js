@@ -1,126 +1,91 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Modal from 'react-modal';
 import Link from 'next/link';
+import Modal from 'react-modal';
+import MagazineContent from '../../components/magazine/MagazineContent';
 import { useRouter } from 'next/router';
-import MakerlogContent from '../../components/post/MakerlogContent';
+import { Fragment } from 'react';
 
-Modal.setAppElement('#modal-root');
+Modal.setAppElement('#__next');
 
-const Magazine = ({ makerlogs }) => {
+const MagazinePage = ({ makerlogs }) => {
   const router = useRouter();
 
-  const closeModal = () => {
-    router.push('/magazine');
-  };
-
-  console.log('current path:::', router.pathname);
-  console.log('current path query:::', router.query.id);
+  console.log('router::;', router.query);
 
   return (
-    <Container>
-      <h1>Magazine</h1>
-      {makerlogs &&
-        makerlogs.map((makerlog) => {
-          const { id, title, content } = makerlog;
-          return (
-            <>
-              <Link
-                key={id}
-                href={`/magazine/?id=${id}`}
-                as={`/magazine/makerlog/${id}`}
-              >
-                <a className='makerlog-wrapper'>
-                  <div className='title'>{title}</div>
-                </a>
-              </Link>
-              <StyledModal
-                isOpen={!!router.query.id}
-                onRequestClose={closeModal}
-                key={id}
-              >
-                <MakerlogContent title={title} content={content} />
-              </StyledModal>
-            </>
-          );
-        })}
-    </Container>
+    <MagazinePageContainer>
+      <div className='title'>list of makerlog</div>
+      {makerlogs.map((makerlog) => {
+        const { id, title } = makerlog;
+        return (
+          <Fragment key={id}>
+            <Link href={`/magazine?magazineId=${id}`} as={`/magazine/${id}`}>
+              <a className='makerlog-item'>
+                {id} {title}
+              </a>
+            </Link>
+          </Fragment>
+        );
+      })}
+      <Modal
+        isOpen={!!router.query.magazineId}
+        onRequestClose={() => {
+          router.push('/magazine');
+        }}
+      >
+        <MagazineContent magazineId={router.query.magazineId} />
+      </Modal>
+    </MagazinePageContainer>
   );
 };
 
-const Container = styled.div`
+const MagazinePageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: auto;
-  margin-top: 64px;
-  padding: 16px;
   width: 1120px;
-
-  h1 {
-    font-family: 'Helvetica Neue';
-    font-size: 80px;
-  }
-
-  .makerlog-wrapper {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px;
-    padding: 16px;
-    border-radius: 24px;
-    background-color: #fff;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      background-color: #f0eeff;
-    }
-  }
+  margin: auto;
+  margin-top: 72px;
 
   .title {
-    font-size: 20px;
-    font-weight: 500;
-  }
-
-  .content {
-    font-size: 14px;
-    line-height: 1.6em;
-    margin-top: 12px;
-  }
-
-  .button {
-    margin-top: 16px;
-    padding: 12px 16px;
-    font-size: 16px;
-    line-height: 1em;
-    background-color: #f0eeff;
+    font-weight: 600;
     color: #6d55ff;
-    border: none;
-    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .makerlog-item {
+    font-size: 32px;
+    line-height: 1.4em;
   }
 `;
 
 const StyledModal = styled(Modal)`
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  z-index: 100000;
+  .ReactModal__Overlay--after-open {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    /* background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: saturate(180%) blur(7px);
+    -webkit-tap-highlight-color: transparent; */
+    overflow: scroll;
+    background-color: red;
+  }
 `;
 
 export const getStaticProps = async () => {
   const res = await fetch('http://localhost:4000/makerlogs');
-  const data = await res.json();
+  const makerlogs = await res.json();
 
   return {
     props: {
-      makerlogs: data,
+      makerlogs,
     },
   };
 };
 
-export default Magazine;
+export default MagazinePage;

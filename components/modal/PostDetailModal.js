@@ -1,30 +1,13 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useRouter } from 'next/router';
-import CardHeader from '../post/CardHeader';
-import PostController from '../post/PostController';
-import UpvoteButtonSmall from '../post/UpvoteButtonSmall';
-import AuthorInfo from '../post/AuthorInfo';
-import CommentSection from '../comment/CommentSection';
-import { useInView } from 'react-intersection-observer';
 
-const Modal = ({
-  isModalOpen,
-  setIsModalOpen,
-  user,
-  tags,
-  upvote,
-  content,
-  title,
-  date,
-  currentPageRoute,
-}) => {
-  const { ref, inView } = useInView();
-  const [isBrowser, setIsBrowser] = useState(false);
+import PostDetailContent from './PostDetailContent';
 
+const PostDetailModal = ({ isModalOpen, makerlogId, currentPageRoute }) => {
   const router = useRouter();
+  const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
     setIsBrowser(true);
@@ -33,60 +16,20 @@ const Modal = ({
   const onClosePostDetailModal = (e) => {
     e.preventDefault();
     router.push(currentPageRoute, undefined, { shallow: false });
-    setIsModalOpen(false);
-    setIsBrowser(false);
   };
 
-  const modalContent = isModalOpen ? (
+  const modalContent = isModalOpen && (
     <ModalOverlay onClick={onClosePostDetailModal}>
       <ModalWrapper>
         <div className='modal-container'>
-          <div className='modal-header' ref={ref}>
-            <CardHeader
-              noMargin={true}
-              lightFont={true}
-              user={user}
-              date={date}
-            />
-            <StyledCloseRoundedIcon onClick={onClosePostDetailModal} />
-          </div>
-          <div className='modal-wrapper' onClick={(e) => e.stopPropagation()}>
-            <PostController inView={inView} />
-            <div className='modal-body-content'>
-              {title ? <div className='title'>{title}</div> : ''}
-              <div className='content-header'>
-                <div className='tags-wrapper'>
-                  {tags.map((tag) => {
-                    const { id, label, slug } = tag;
-                    return (
-                      <div key={id} className={`tag ${label}`}>
-                        {label}
-                      </div>
-                    );
-                  })}
-                </div>
-                <UpvoteButtonSmall upvote={upvote} />
-              </div>
-              <div className='content'>{content}</div>
-              <AuthorInfo user={user} />
-              <CommentSection />
-            </div>
-          </div>
+          <PostDetailContent
+            makerlogId={makerlogId}
+            onClosePostDetailModal={onClosePostDetailModal}
+          />
         </div>
       </ModalWrapper>
     </ModalOverlay>
-  ) : null;
-
-  console.log('modal content:::', !!modalContent);
-
-  // if (!!modalContent) {
-  //   return ReactDOM.createPortal(
-  //     modalContent,
-  //     document.getElementById('modal-root')
-  //   );
-  // } else {
-  //   return null;
-  // }
+  );
 
   if (isBrowser) {
     return ReactDOM.createPortal(
@@ -112,13 +55,6 @@ const ModalOverlay = styled.div`
   backdrop-filter: saturate(180%) blur(7px);
   -webkit-tap-highlight-color: transparent;
   overflow: scroll;
-
-  .sticky-wrapper {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100vh;
-  }
 
   .modal-container {
     display: flex;
@@ -240,18 +176,4 @@ const ModalWrapper = styled.div`
   height: 100vh;
 `;
 
-const StyledCloseRoundedIcon = styled(CloseRoundedIcon)`
-  display: flex;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid #e5e5e8;
-  color: #707070;
-  cursor: pointer;
-  position: relative;
-  padding: 2px;
-  box-sizing: content-box;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  backdrop-filter: saturate(180%) blur(16px);
-  border-radius: 2rem;
-`;
-
-export default Modal;
+export default PostDetailModal;

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import MyCard from './MyCard';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const myProfile = {
   id: 'hpark',
@@ -35,14 +37,17 @@ const MyMakerlogs = ({ myMakerlogs }) => {
                     );
                   })}
                 </div>
-                <MyCard
-                  id={id}
-                  title={title}
-                  content={content}
-                  user={myProfile}
-                  tags={tags}
-                  upvote={upvote}
-                />
+                <Link
+                  href={`/profile/posts/makerlogs/?makerlogId=${id}`}
+                  as={`/${myProfile.name}/makerlog/${id}`}
+                  scroll={false}
+                  shallow
+                  passHref
+                >
+                  <a className='link-wrapper'>
+                    <MyCard id={id} title={title} content={content} />
+                  </a>
+                </Link>
               </div>
             </div>
           );
@@ -94,6 +99,10 @@ const MyMakerlogsContainer = styled.div`
     display: flex;
     margin-top: -4px;
     margin-bottom: 12px;
+  }
+
+  .link-wrapper {
+    width: 100%;
   }
 `;
 

@@ -3,23 +3,15 @@ import ProfileDetailInfo from '../../../components/profile/ProfileDetailInfo';
 import ProfileTabs from '../../../components/profile/ProfileTabs';
 import MyPosts from '../../../components/profile/MyPosts';
 import MainLayout from '../../../components/layout/MainLayout';
-import { useState, useEffect } from 'react';
 import { GraphQLClient } from 'graphql-request';
 import { GET_TRENDING_PRODUCTS } from '../../../graphql/posts';
+import PostDetailModal from '../../../components/modal/PostDetailModal';
+import { useRouter } from 'next/router';
 
-const ProfilePosts = ({ trendingProducts }) => {
-  const [myMakerlogs, setMyMakerlogs] = useState(null);
+const ProfilePosts = ({ trendingProducts, myMakerlogs }) => {
+  const router = useRouter();
 
-  useEffect(() => {
-    const getMyMakerlogs = async () => {
-      const response = await fetch('http://localhost:4000/myMakerlogs');
-      const data = await response.json();
-      setMyMakerlogs(data);
-    };
-
-    getMyMakerlogs();
-  }, []);
-
+  console.log('router path name:::', router.query);
   return (
     <PageContainer>
       <MainLayout trendingProducts={trendingProducts}>
@@ -27,6 +19,11 @@ const ProfilePosts = ({ trendingProducts }) => {
         <ProfileTabs />
         <MyPosts postType={'myMakerlogs'} data={myMakerlogs} />
       </MainLayout>
+      <PostDetailModal
+        isModalOpen={!!router.query.makerlogId}
+        currentPageRoute={router.pathname}
+        makerlogId={router.query.makerlogId}
+      />
     </PageContainer>
   );
 };
@@ -36,9 +33,8 @@ const PageContainer = styled.div`
   margin-top: 80px;
 `;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const url = process.env.ENDPOINT;
-
   const graphQLClient = new GraphQLClient(url, {
     headers: {
       Authorization: process.env.GRAPH_CMS_TOKEN,
@@ -48,16 +44,19 @@ export const getStaticProps = async () => {
   const trendingProductsData = await graphQLClient.request(
     GET_TRENDING_PRODUCTS
   );
-
   const trendingProducts = trendingProductsData.trendingProducts.sort(
     (a, b) => {
       return a.rank - b.rank;
     }
   );
 
+  const res = await fetch('http://localhost:4000/myMakerlogs');
+  const myMakerlogs = await res.json();
+
   return {
     props: {
       trendingProducts,
+      myMakerlogs,
     },
   };
 };

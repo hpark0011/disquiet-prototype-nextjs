@@ -1,23 +1,8 @@
-import React from 'react';
+import styled from 'styled-components';
 import PostDetailModal from '../../../components/modal/PostDetailModal';
 
 const MakerlogDetailPage = ({ makerlogs }) => {
-  console.log('makerlogs:::', makerlogs);
-  return (
-    <Container>
-      <PostDetailModal
-        user={user}
-        // isModalOpen={isModalOpen}
-        // setIsModalOpen={setIsModalOpen}
-        tags={tags}
-        upvote={upvote}
-        content={content}
-        title={title}
-        date={date}
-        currentPageRoute={router.pathname}
-      />
-    </Container>
-  );
+  return <Container>makerlog detail page</Container>;
 };
 
 const Container = styled.div`
@@ -26,15 +11,14 @@ const Container = styled.div`
   margin-top: 80px;
 `;
 
-export const getStaticProps = async ({ context }) => {
+export const getStaticProps = async (context) => {
   const { params } = context;
-  console.log('params:::', params);
   const response = await fetch(
     `http://localhost:4000/makerlogs/${params.makerlogId}`
   );
-  const makerlogs = response.json();
+  const makerlogs = await response.json();
 
-  if (!data) {
+  if (!makerlogs) {
     return {
       notFound: true,
     };
@@ -44,6 +28,24 @@ export const getStaticProps = async ({ context }) => {
     props: {
       makerlogs,
     },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const res = await fetch(`http://localhost:4000/makerlogs`);
+  const makerlogs = await res.json();
+  const paths = makerlogs.map((makerlog) => {
+    return {
+      params: {
+        userId: makerlog.user.id.toString(),
+        makerlogId: makerlog.id.toString(),
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: true,
   };
 };
 

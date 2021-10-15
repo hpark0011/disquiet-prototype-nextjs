@@ -5,7 +5,7 @@ import CardBodyFooter from './CardBodyFooter';
 
 const CardBody = ({ content, upvote, title, tags, onCardBodyClick }) => {
   return (
-    <Container onClick={onCardBodyClick}>
+    <Container>
       <CardBodyHeader upvote={upvote} tags={tags} title={title} />
       <CardBodyBody content={content} />
       <CardBodyFooter />
@@ -13,7 +13,7 @@ const CardBody = ({ content, upvote, title, tags, onCardBodyClick }) => {
   );
 };
 
-const Container = styled.a`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;

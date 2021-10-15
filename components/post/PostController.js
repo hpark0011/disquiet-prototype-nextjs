@@ -5,18 +5,18 @@ import ControllerArrowBackward from '../../assets/icons/controller_arrow_backwar
 
 const PostController = ({ inView }) => {
   return (
-    <Container inView={inView}>
+    <Container $inView={inView}>
       <div className='content-title'>디스콰이엇 메이커로그</div>
       <div className='page-number'>31 / 31</div>
       <div className='post-controller-wrapper'>
-        <Button inView={inView}>
-          <ArrowBackwardIcon inView={inView} />
+        <Button $inView={inView}>
+          <ArrowBackwardIcon $inView={inView} />
         </Button>
-        <Button inView={inView}>
-          <ArrowForwardIcon inView={inView} />
+        <Button $inView={inView}>
+          <ArrowForwardIcon $inView={inView} />
         </Button>
-        <Button inView={inView}>
-          <EllipsisIcon inView={inView} />
+        <Button $inView={inView}>
+          <EllipsisIcon $inView={inView} />
         </Button>
       </div>
     </Container>
@@ -33,18 +33,18 @@ const Container = styled.div`
   transition: all 0.3s ease-in-out;
   padding: 6px 14px;
   border-radius: 32px;
-  background-color: ${({ inView }) =>
-    inView ? 'transparent' : 'rgba(0, 0, 0, 0.7);'};
+  background-color: ${({ $inView }) =>
+    $inView ? 'transparent' : 'rgba(0, 0, 0, 0.7);'};
   backdrop-filter: saturate(180%) blur(7px);
 
   .content-title {
     display: flex;
     width: 100%;
-    font-weight: ${({ inView }) => (inView ? '500' : '400')};
+    font-weight: ${({ $inView }) => ($inView ? '500' : '400')};
     font-size: 16px;
     line-height: 1.2em;
     align-items: center;
-    color: ${({ inView }) => (inView ? '#000' : '#fff')};
+    color: ${({ $inView }) => ($inView ? '#000' : '#fff')};
   }
 
   .page-number {
@@ -53,7 +53,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     font-family: 'Helvetica Neue';
-    color: ${({ inView }) => (inView ? '#8e8e8e' : '#e5e5e8')};
+    color: ${({ $inView }) => ($inView ? '#8e8e8e' : '#e5e5e8')};
   }
 
   .post-controller-wrapper {
@@ -68,8 +68,8 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  border: ${({ inView }) =>
-    inView ? '1px solid #e5e5e8' : '1px solid transparent'};
+  border: ${({ $inView }) =>
+    $inView ? '1px solid #e5e5e8' : '1px solid transparent'};
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   padding: 0px;
@@ -77,20 +77,20 @@ const Button = styled.button`
   margin-left: 6px;
 
   &:hover {
-    background-color: ${({ inView }) => (inView ? '#f5f5f7' : '#707070')};
+    background-color: ${({ $inView }) => ($inView ? '#f5f5f7' : '#707070')};
   }
 `;
 
 const EllipsisIcon = styled(ControllerEllipsis)`
-  fill: ${({ inView }) => (inView ? '#c4c4c4' : '#fff')};
+  fill: ${({ $inView }) => ($inView ? '#c4c4c4' : '#fff')};
 `;
 
 const ArrowForwardIcon = styled(ControllerArrowForward)`
-  fill: ${({ inView }) => (inView ? '#c4c4c4' : '#fff')};
+  fill: ${({ $inView }) => ($inView ? '#c4c4c4' : '#fff')};
 `;
 
 const ArrowBackwardIcon = styled(ControllerArrowBackward)`
-  fill: ${({ inView }) => (inView ? '#c4c4c4' : '#fff')};
+  fill: ${({ $inView }) => ($inView ? '#c4c4c4' : '#fff')};
 `;
 
 export default PostController;

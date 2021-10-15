@@ -12,7 +12,7 @@ const IntersectionObserver = () => {
   return (
     <Container>
       <h1 className='title'>observe intersection animation</h1>
-      <Detector inView={inView}>look closely at this!</Detector>
+      <Detector $inView={inView}>look closely at this!</Detector>
       <div className='gap'>this is a massive gap in between</div>
       <div className='box' ref={ref}></div>
       <div className='gap'>this is a massive gap in between</div>
@@ -51,8 +51,8 @@ const Detector = styled.div`
   top: 80px;
   z-index: 10000;
   transition: all 0.2s ease-in-out;
-  height: ${({ inView }) => (inView ? '64px' : '32px')};
-  background-color: ${({ inView }) => (inView ? '#6d55ff' : 'red')};
+  height: ${({ $inView }) => ($inView ? '64px' : '32px')};
+  background-color: ${({ $inView }) => ($inView ? '#6d55ff' : 'red')};
 `;
 
 export default IntersectionObserver;
