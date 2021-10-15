@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import { useRouter } from 'next/router';
-import PostDetailModal from '../modal/PostDetailModal';
-import { useState } from 'react';
 import Link from 'next/link';
 
 const Card = ({ id, ...other }) => {

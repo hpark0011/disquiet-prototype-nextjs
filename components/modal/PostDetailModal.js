@@ -9,6 +9,9 @@ const PostDetailModal = ({ isModalOpen, makerlogId, currentPageRoute }) => {
   const router = useRouter();
   const [isBrowser, setIsBrowser] = useState(false);
 
+  console.log('isbrowser state:::', isBrowser);
+  console.log('isModalOpen:::', isModalOpen);
+
   useEffect(() => {
     setIsBrowser(true);
   }, []);

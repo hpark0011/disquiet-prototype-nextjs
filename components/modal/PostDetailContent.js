@@ -17,7 +17,6 @@ const fetcher = async (makerlogId) => {
 
 const PostDetailContent = ({ makerlogId, onClosePostDetailModal }) => {
   const { data, error } = useSWR(makerlogId, fetcher);
-  const router = useRouter();
   const { ref, inView } = useInView();
 
   if (error) {

@@ -11,7 +11,6 @@ import { useRouter } from 'next/router';
 const ProfilePosts = ({ trendingProducts, myMakerlogs }) => {
   const router = useRouter();
 
-  console.log('router path name:::', router.query);
   return (
     <PageContainer>
       <MainLayout trendingProducts={trendingProducts}>
@@ -40,7 +39,6 @@ export const getServerSideProps = async () => {
       Authorization: process.env.GRAPH_CMS_TOKEN,
     },
   });
-
   const trendingProductsData = await graphQLClient.request(
     GET_TRENDING_PRODUCTS
   );
@@ -50,7 +48,7 @@ export const getServerSideProps = async () => {
     }
   );
 
-  const res = await fetch('http://localhost:4000/myMakerlogs');
+  const res = await fetch('http://localhost:4000/mymakerlogs');
   const myMakerlogs = await res.json();
 
   return {
