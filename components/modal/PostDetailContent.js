@@ -34,14 +34,20 @@ const PostDetailContent = ({ makerlogId, onClosePostDetailModal }) => {
         <div className='modal-header' ref={ref}>
           <CardHeader
             noMargin={true}
-            lightFont={true}
+            lightFont={!!onClosePostDetailModal}
             user={user}
             date={date}
           />
-          <StyledCloseRoundedIcon onClick={onClosePostDetailModal} />
+          {onClosePostDetailModal && (
+            <StyledCloseRoundedIcon onClick={onClosePostDetailModal} />
+          )}
         </div>
-        <div className='modal-wrapper' onClick={(e) => e.stopPropagation()}>
-          <PostController inView={inView} />
+        <div
+          $isModal={!!onClosePostDetailModal}
+          className='modal-wrapper'
+          onClick={(e) => e.stopPropagation()}
+        >
+          <PostController inView={inView} isModal={!!onClosePostDetailModal} />
           <div className='modal-body-content'>
             {title ? <div className='title'>{title}</div> : ''}
             <div className='content-header'>
@@ -95,14 +101,6 @@ const PostDetailContentContainer = styled.div`
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     align-items: center;
-  }
-
-  .modal-body-header {
-    display: flex;
-    margin-bottom: 40px;
-    width: 100%;
-    position: sticky;
-    top: 12px;
   }
 
   .modal-body-content {

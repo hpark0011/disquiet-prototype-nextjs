@@ -3,9 +3,10 @@ import ControllerEllipsis from '../../assets/icons/controller_ellipsis.svg';
 import ControllerArrowForward from '../../assets/icons/controller_arrow_forward.svg';
 import ControllerArrowBackward from '../../assets/icons/controller_arrow_backward.svg';
 
-const PostController = ({ inView }) => {
+const PostController = ({ inView, isModal }) => {
+  console.log('ismodal', isModal);
   return (
-    <Container $inView={inView}>
+    <Container $isModal={isModal} $inView={inView}>
       <div className='content-title'>디스콰이엇 메이커로그</div>
       <div className='page-number'>31 / 31</div>
       <div className='post-controller-wrapper'>
@@ -29,7 +30,7 @@ const Container = styled.div`
   width: 100%;
   margin-bottom: 40px;
   position: sticky;
-  top: 10px;
+  top: ${({ $isModal }) => ($isModal ? '10px' : '56px')};
   transition: all 0.3s ease-in-out;
   padding: 6px 14px;
   border-radius: 32px;

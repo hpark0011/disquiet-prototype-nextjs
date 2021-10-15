@@ -1,14 +1,25 @@
 import styled from 'styled-components';
-import PostDetailModal from '../../../components/modal/PostDetailModal';
+import PostDetailContent from '../../../components/modal/PostDetailContent';
+import { useRouter } from 'next/router';
 
-const MakerlogDetailPage = ({ makerlogs }) => {
-  return <Container>makerlog detail page</Container>;
+const MakerlogDetailPage = ({ makerlog }) => {
+  if (!makerlog) {
+    return 'makerlog loading...';
+  }
+  return (
+    <Container>
+      <PostDetailContent makerlogId={makerlog.id} />
+    </Container>
+  );
 };
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+  margin: auto;
+  margin-top: 48px;
+  align-items: center;
+  background-color: #f5f5f7;
 `;
 
 export const getStaticProps = async (context) => {
@@ -16,9 +27,9 @@ export const getStaticProps = async (context) => {
   const response = await fetch(
     `http://localhost:4000/makerlogs/${params.makerlogId}`
   );
-  const makerlogs = await response.json();
+  const makerlog = await response.json();
 
-  if (!makerlogs) {
+  if (!makerlog) {
     return {
       notFound: true,
     };
@@ -26,7 +37,7 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
-      makerlogs,
+      makerlog,
     },
   };
 };

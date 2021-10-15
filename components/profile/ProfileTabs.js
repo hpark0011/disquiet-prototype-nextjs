@@ -55,7 +55,6 @@ const TabsWrapper = styled.div`
   margin-top: 24px;
   width: 100%;
   justify-content: space-between;
-  }
 `;
 
 const TabItem = styled.a`
