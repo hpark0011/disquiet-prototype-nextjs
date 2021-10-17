@@ -16,6 +16,7 @@ const Categories = () => {
   const { topics } = useContext(TopicsContext);
 
   const currentFeedType = router.query.feedType;
+  const currentSort = router.query.sort;
 
   return (
     <Container>
@@ -34,6 +35,7 @@ const Categories = () => {
                 query: {
                   topic: queryString,
                   feedType: !currentFeedType ? 'all' : currentFeedType,
+                  sort: currentSort,
                 },
               }}
             >

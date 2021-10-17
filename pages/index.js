@@ -13,10 +13,12 @@ const HomePage = ({ trendingProducts, makerlogs }) => {
   const router = useRouter();
   const { setTabIndex } = useContext(FeedTabContext);
 
+  console.log('router:::', router);
+
   useEffect(() => {
     router.pathname === '/' &&
       Object.keys(router.query).length === 0 &&
-      router.push('/?topic=all&feedType=all') &&
+      router.push('/?topic=all&feedType=all&sort=popular') &&
       setTabIndex(0);
   }, [router.query]);
 
@@ -28,7 +30,6 @@ const HomePage = ({ trendingProducts, makerlogs }) => {
       </MainLayout>
       <PostDetailModal
         isModalOpen={!!router.query.makerlogId}
-        currentPageRoute={router.pathname}
         makerlogId={router.query.makerlogId}
       />
     </PageContainer>

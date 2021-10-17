@@ -23,7 +23,6 @@ const ProfilePosts = ({ trendingProducts, myMakerlogs }) => {
       </MainLayout>
       <PostDetailModal
         isModalOpen={!!router.query.makerlogId}
-        currentPageRoute={router.pathname}
         makerlogId={router.query.makerlogId}
       />
     </PageContainer>

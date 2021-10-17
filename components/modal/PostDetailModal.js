@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import PostDetailContent from './PostDetailContent';
 
-const PostDetailModal = ({ isModalOpen, makerlogId, currentPageRoute }) => {
+const PostDetailModal = ({ isModalOpen, makerlogId }) => {
   const router = useRouter();
   const [isBrowser, setIsBrowser] = useState(false);
 
@@ -15,7 +15,7 @@ const PostDetailModal = ({ isModalOpen, makerlogId, currentPageRoute }) => {
 
   const onClosePostDetailModal = (e) => {
     e.preventDefault();
-    router.push(currentPageRoute, undefined, { shallow: false });
+    router.back();
   };
 
   const modalContent = isModalOpen && (

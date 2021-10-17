@@ -10,6 +10,8 @@ const FeedHeader = () => {
   const { tabs, tabIndex, setTabIndex } = useContext(FeedTabContext);
   const router = useRouter();
   const currentTopic = router.query.topic;
+  const currentFeedType = router.query.feedType;
+  const currentSort = router.query.sort;
   const currentTopicName = currentTopic
     ? topics.find((topic) => topic.queryString === currentTopic).topicName
     : '🌕 전체';
@@ -31,8 +33,16 @@ const FeedHeader = () => {
       <div className='header'>
         <div className='current-topic'>{currentTopicName}</div>
         <div className='sort-wrapper'>
-          <div className='sort-item selected'>인기</div>
-          <div className='sort-item'>최신</div>
+          <Link
+            href={`/?topic=${currentTopic}&feedType=${currentFeedType}&sort=popular`}
+          >
+            <SortItem active={router.query.sort === 'popular'}>인기</SortItem>
+          </Link>
+          <Link
+            href={`/?topic=${currentTopic}&feedType=${currentFeedType}&sort=recent`}
+          >
+            <SortItem active={router.query.sort === 'recent'}>최신</SortItem>
+          </Link>
         </div>
       </div>
       <div className='tabs-wrapper'>
@@ -47,6 +57,7 @@ const FeedHeader = () => {
                   query: {
                     topic: !currentTopic ? 'all' : currentTopic,
                     feedType: query,
+                    sort: currentSort,
                   },
                 }}
               >
@@ -149,6 +160,21 @@ const Container = styled.div`
   }
 `;
 
+const SortItem = styled.a`
+  font-size: 12px;
+  padding: 4px 6px;
+  color: ${({ active }) => (active ? '#6d55ff' : '#8e8e8e')};
+  background-color: ${({ active }) => (active ? '#e2ddff' : 'transparent')};
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #e2ddff;
+    color: #6d55ff;
+  }
+`;
+
 const TabItem = styled.a`
   display: flex;
   align-items: center;
@@ -160,6 +186,12 @@ const TabItem = styled.a`
   color: ${({ active }) => (active ? '#6d55ff' : '#8e8e8e')};
   border-bottom: 2px solid rgba(0, 0, 0, 0);
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: #6d55ff;
+    border-bottom: 2px solid #6d55ff;
+  }
 `;
 
 const ActiveTabIndicator = styled.div`
