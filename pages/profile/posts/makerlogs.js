@@ -7,16 +7,19 @@ import { GraphQLClient } from 'graphql-request';
 import { GET_TRENDING_PRODUCTS } from '../../../graphql/posts';
 import PostDetailModal from '../../../components/modal/PostDetailModal';
 import { useRouter } from 'next/router';
+import { useInView } from 'react-intersection-observer';
 
 const ProfilePosts = ({ trendingProducts, myMakerlogs }) => {
+  const { ref, inView } = useInView();
   const router = useRouter();
+  console.log('profile inview:::', inView);
 
   return (
     <PageContainer>
       <MainLayout trendingProducts={trendingProducts}>
         <ProfileDetailInfo />
-        <ProfileTabs />
-        <MyPosts postType={'myMakerlogs'} data={myMakerlogs} />
+        <ProfileTabs inViewRef={ref} />
+        <MyPosts postType={'myMakerlogs'} data={myMakerlogs} inView={inView} />
       </MainLayout>
       <PostDetailModal
         isModalOpen={!!router.query.makerlogId}

@@ -17,6 +17,7 @@ const MakerlogListPage = ({ makerlogList }) => {
 
   return (
     <Container>
+      <IntersectionObserver />
       <h1>MAKERLOG LIST</h1>
       <FilterWrapper>
         <Filter

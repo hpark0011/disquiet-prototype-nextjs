@@ -39,7 +39,7 @@ const Container = styled.div`
 
   .border-box {
     padding: 0.75rem;
-    background-color: rgb(245, 245, 247);
+    background-color: #fff;
     border-radius: 1rem;
   }
 
@@ -56,7 +56,7 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(255, 255, 255);
+    background-color: #f5f5f7;
     padding: 3px 3px 3px 10px;
     border-radius: 2rem;
     box-sizing: border-box;

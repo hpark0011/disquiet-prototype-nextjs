@@ -28,7 +28,7 @@ const CreateNewPost = () => {
 const CreatePostContainer = styled.a`
   display: flex;
   flex-direction: row;
-  background-color: #f5f5f7;
+  background-color: #fff;
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -60,7 +60,7 @@ const CreatePostContainer = styled.a`
     padding: 1px;
     background-color: #fff;
     border-radius: 32px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   }
 `;
 

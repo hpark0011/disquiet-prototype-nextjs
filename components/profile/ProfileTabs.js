@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { ProfileTabIndexContext } from '../../store/profile-tab-index-context';
 
-const ProfileTabs = () => {
+const ProfileTabs = ({ inViewRef }) => {
   const router = useRouter();
   const { tabs, tabIndex, setTabIndex } = useContext(ProfileTabIndexContext);
 
@@ -13,7 +13,7 @@ const ProfileTabs = () => {
   };
 
   return (
-    <TabsContainer>
+    <TabsContainer ref={inViewRef}>
       <TabsWrapper>
         {tabs.map((tab) => {
           const { id, label, query } = tab;
@@ -79,7 +79,7 @@ const Divider = styled.div`
   margin-top: -1px;
   position: relative;
   height: 1px;
-  background-color: #f5f5f7;
+  background-color: #e5e5e8;
   z-index: 0;
 `;
 

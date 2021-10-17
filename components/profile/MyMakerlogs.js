@@ -110,7 +110,7 @@ const Line = styled.div`
   width: 2px;
   height: 100%;
   background-color: ${({ $lastItem }) =>
-    $lastItem ? 'transparent' : '#f5f5f7'};
+    $lastItem ? 'transparent' : '#ebebed'};
 
   &:before {
     content: '';
@@ -119,7 +119,7 @@ const Line = styled.div`
     height: 6px;
     background-color: #fff;
     border-radius: 32px;
-    border: 3px solid #20ab98;
+    border: 3px solid #1bce6b;
     position: absolute;
     float: left;
     top: 0;
@@ -131,9 +131,9 @@ const Tag = styled.div`
   font-size: 12px;
   line-height: 1em;
   padding: 4px 8px;
-  background: #e9f7f5;
+  background: #d4efe2;
   border-radius: 32px;
-  color: #20ab98;
+  color: #1bce6b;
   margin-right: 6px;
 `;
 

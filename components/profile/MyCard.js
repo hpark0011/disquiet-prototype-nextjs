@@ -17,7 +17,7 @@ const MyCardContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: auto;
-  background-color: #f5f5f7;
+  background-color: #fff;
   border-radius: 24px;
   padding: 16px;
   cursor: pointer;
@@ -25,7 +25,7 @@ const MyCardContainer = styled.div`
 
   &:hover {
     background-color: #fcfcfc;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.07);
   }
 
   .title {

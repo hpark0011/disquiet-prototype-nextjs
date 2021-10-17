@@ -17,14 +17,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: #f5f5f7;
+  background-color: #fff;
   border-radius: 24px;
   margin-left: 36px;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   &:hover {
     background-color: #fcfcfc;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.07);
   }
 `;
 

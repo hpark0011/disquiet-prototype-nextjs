@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import useSWR from 'swr';
 import { useInView } from 'react-intersection-observer';
-import { useRouter } from 'next/router';
 import CardHeader from '../post/CardHeader';
 import PostController from '../post/PostController';
 import UpvoteButtonSmall from '../post/UpvoteButtonSmall';
@@ -42,11 +41,7 @@ const PostDetailContent = ({ makerlogId, onClosePostDetailModal }) => {
             <StyledCloseRoundedIcon onClick={onClosePostDetailModal} />
           )}
         </div>
-        <div
-          $isModal={!!onClosePostDetailModal}
-          className='modal-wrapper'
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className='modal-wrapper' onClick={(e) => e.stopPropagation()}>
           <PostController inView={inView} isModal={!!onClosePostDetailModal} />
           <div className='modal-body-content'>
             {title ? <div className='title'>{title}</div> : ''}

@@ -19,14 +19,14 @@ const Container = styled.div`
     font-size: 12px;
     line-height: 1em;
     color: #6d55ff;
-    background-color: #f0eeff;
+    background-color: #e2ddff;
     border-radius: 16px;
     margin-right: 6px;
   }
 
   .tag-wrapper.orange {
-    color: #f2994a;
-    background-color: #fef5ed;
+    color: #ff9700;
+    background-color: #ffeacc;
   }
 `;
 

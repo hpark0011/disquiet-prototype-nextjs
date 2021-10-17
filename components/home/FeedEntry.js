@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import CreateNewPost from './CreateNewPost';
 import profile_photo from '../../assets/images/profile-photo.jpg';
-import FeedEntryBoxTags from '../profile/Records';
+import Records from '../profile/Records';
 
 const FeedEntry = () => {
   return (
@@ -20,7 +20,7 @@ const FeedEntry = () => {
       </Link>
       <div className='right-cluster-wrapper'>
         <CreateNewPost />
-        <FeedEntryBoxTags />
+        <Records />
       </div>
     </Container>
   );

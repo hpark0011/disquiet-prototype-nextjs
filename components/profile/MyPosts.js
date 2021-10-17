@@ -3,10 +3,11 @@ import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 import MyMakerlogs from './MyMakerlogs';
 import MyProducts from './MyProducts';
 
-const MyPosts = ({ postType, error, data }) => {
+const MyPosts = ({ postType, error, data, inView }) => {
+  console.log('myposts porifle inveiw:::', inView);
   return (
     <PostsContainer>
-      <div className='my-posts-sticky-wrapper'>
+      <MyPostsStickyContainer $inView={inView}>
         <div className='posts-header'>
           <div className='title-wrapper'>
             {postType === 'myMakerlogs' && '메이커로그'}
@@ -25,7 +26,7 @@ const MyPosts = ({ postType, error, data }) => {
             <ArrowTriangleDownIcon $isColor />
           </div>
         </div>
-      </div>
+      </MyPostsStickyContainer>
       {postType === 'myMakerlogs' && <MyMakerlogs myMakerlogs={data} />}
       {postType === 'myProducts' && <MyProducts myProducts={data} />}
     </PostsContainer>
@@ -45,8 +46,11 @@ const PostsContainer = styled.div`
     top: 48px;
     z-index: 2;
     padding-bottom: 12px;
-    background-color: rgba(255, 255, 255, 0.72);
+    background-color: rgba(245, 245, 247, 0.72);
     backdrop-filter: saturate(180%) blur(20px);
+    transition: all 0.2s ease-in-out;
+    border-bottom: ${({ $inView }) =>
+      $inView ? '1px solid transparent' : '1px solid #ececee'};
   }
 
   .posts-header {
@@ -71,8 +75,8 @@ const PostsContainer = styled.div`
     border-radius: 32px;
     color: #6d55ff;
     font-weight: 500;
-    background-color: #f0eeff;
-    border: 1px solid #f0eeff;
+    background-color: #e2ddff;
+    border: 1px solid #e2ddff;
     transition: all 0.2s ease-in-out;
     font-size: 13px;
     line-height: 1em;
@@ -96,11 +100,25 @@ const PostsContainer = styled.div`
     line-height: 1em;
     padding: 1px 1px 1px 8px;
     color: #6d55ff;
-    background-color: #f0eeff;
+    background-color: #e2ddff;
     border-radius: 32px;
     cursor: pointer;
     margin-right: 8px;
   }
+`;
+
+const MyPostsStickyContainer = styled.div`
+  position: sticky;
+  padding-top: 32px;
+  margin-bottom: 8px;
+  top: 48px;
+  z-index: 2;
+  padding-bottom: 16px;
+  background-color: rgba(245, 245, 247, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  transition: all 0.2s ease-in-out;
+  border-bottom: ${({ $inView }) =>
+    $inView ? '1px solid transparent' : '1px solid #ececee'};
 `;
 
 const ArrowTriangleDownIcon = styled(ArrowTriangleDown)`

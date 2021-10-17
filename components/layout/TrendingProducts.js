@@ -39,7 +39,7 @@ const Container = styled.div`
 
   .border-box {
     padding: 4px;
-    background-color: rgb(245, 245, 247);
+    background-color: #fff;
     border-radius: 1rem;
   }
 
@@ -54,8 +54,8 @@ const Container = styled.div`
     cursor: pointer;
 
     &:hover {
-      background-color: #fcfcfe;
-      box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+      background-color: #f5f5f7;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -70,7 +70,7 @@ const Container = styled.div`
     width: 32px;
     height: 32px;
     background-color: #fff;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
     margin-right: 8px;
     border-radius: 10px;
     overflow: hidden;

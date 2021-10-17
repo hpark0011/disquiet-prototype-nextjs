@@ -8,11 +8,13 @@ const IntersectionObserver = () => {
   const { ref, inView } = useInView();
 
   useEffect(() => {}, [inView]);
+  console.log('inview:::', ref);
+  console.log('inview:::', inView);
 
   return (
     <Container>
       <h1 className='title'>observe intersection animation</h1>
-      <Detector $inView={inView}>look closely at this!</Detector>
+      <Detector $inView={!inView}>look closely at this!</Detector>
       <div className='gap'>this is a massive gap in between</div>
       <div className='box' ref={ref}></div>
       <div className='gap'>this is a massive gap in between</div>

@@ -32,7 +32,7 @@ const Container = styled.div`
     justify-content: center;
     font-size: 12px;
     line-height: 1em;
-    background-color: #e5e5e8;
+    background-color: #f5f5f7;
     padding: 5px 8px;
     margin-right: 6px;
     border-radius: 1rem;
@@ -45,7 +45,7 @@ const Container = styled.div`
     justify-content: center;
     font-size: 12px;
     line-height: 1em;
-    background-color: #e5e5e8;
+    background-color: #f5f5f7;
     padding: 2px 8px 2px 6px;
     margin-right: 6px;
     border-radius: 1rem;

@@ -58,30 +58,30 @@ const Container = styled.div`
     font-size: 12px;
     line-height: 1em;
     color: #6d55ff;
-    background-color: #e2ddff;
+    background-color: #f0eeff;
   }
 
   .tag.마일스톤 {
-    color: #ff9700;
-    background-color: #ffeacc;
+    color: #ff749c;
+    background-color: #fff1f5;
   }
 
   .tag.아이디어 {
-    color: #157bff;
-    background-color: #c8ddf9;
+    color: #1bce6b;
+    background-color: #e8faf0;
   }
 
   .tag.MVP {
-    color: #1bce6b;
-    background-color: #c9eddb;
+    color: #fe7644;
+    background-color: #fff1ec;
   }
   .tag.인사이트 {
-    color: #ff749c;
-    background-color: #f7dbe5;
+    color: #ea4746;
+    background-color: #fdeded;
   }
   .tag.문제발견 {
-    color: #ea4746;
-    background-color: #f3d2d4;
+    color: #2f80ed;
+    background-color: #eaf2fd;
   }
 `;
 

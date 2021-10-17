@@ -6,9 +6,19 @@ import { GraphQLClient } from 'graphql-request';
 import { GET_TRENDING_PRODUCTS } from '../graphql/posts';
 import PostDetailModal from '../components/modal/PostDetailModal';
 import { useRouter } from 'next/router';
+import { useEffect, useContext } from 'react';
+import { FeedTabContext } from '../store/feed-tab-context';
 
 const HomePage = ({ trendingProducts, makerlogs }) => {
   const router = useRouter();
+  const { setTabIndex } = useContext(FeedTabContext);
+
+  useEffect(() => {
+    router.pathname === '/' &&
+      Object.keys(router.query).length === 0 &&
+      router.push('/?topic=all&feedType=all') &&
+      setTabIndex(0);
+  }, [router.query]);
 
   return (
     <PageContainer>

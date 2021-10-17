@@ -15,6 +15,8 @@ const Categories = () => {
 
   const { topics } = useContext(TopicsContext);
 
+  const currentFeedType = router.query.feedType;
+
   return (
     <Container>
       <div className='category' onClick={onCategoryClick}>
@@ -22,20 +24,18 @@ const Categories = () => {
         <div className='category-label'>Topics</div>
       </div>
       <CategoryItems $isOpen={isOpen}>
-        <Link href='/'>
-          <CategoryItem
-            $isOpen={isOpen}
-            isActive={router.query.topic === undefined ? 'active' : ''}
-          >
-            🌕 전체
-          </CategoryItem>
-        </Link>
         {topics.map((topic) => {
           const { id, topicName, queryString } = topic;
           return (
             <Link
               key={id}
-              href={{ pathname: '/', query: { topic: `${queryString}` } }}
+              href={{
+                pathname: '/',
+                query: {
+                  topic: queryString,
+                  feedType: !currentFeedType ? 'all' : currentFeedType,
+                },
+              }}
             >
               <CategoryItem
                 $isOpen={isOpen}
@@ -92,7 +92,7 @@ const CategoryItem = styled.a`
   display: flex;
   align-items: center;
   background-color: ${({ isActive }) =>
-    isActive === 'active' ? '#f5f5f7' : 'rgba(0, 0, 0, 0)'};
+    isActive === 'active' ? '#ececee' : 'rgba(0, 0, 0, 0)'};
   border-radius: 10px;
   margin: 2px 0px;
   padding: 7px 7px 7px 24px;
@@ -105,7 +105,7 @@ const CategoryItem = styled.a`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #f5f5f7;
+    background-color: #ececee;
   }
 `;
 
