@@ -15,9 +15,8 @@ const MakerlogTextarea = ({ register }) => {
 const Container = styled.div`
   display: flex;
   width: 100%;
-  min-height: 160px;
+  min-height: 240px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #f5f5f7;
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -25,7 +24,7 @@ const Textarea = styled(TextareaAutosize)`
   width: 100%;
   height: 160px;
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.5em;
   resize: none;
   border: none;
@@ -33,7 +32,7 @@ const Textarea = styled(TextareaAutosize)`
   font-family: 'Helvetica Neue';
 
   &::placeholder {
-    font-size: 18px;
+    font-size: 16px;
     color: #c4c4c4;
     line-height: 1.5em;
     font-weight: 400;

@@ -44,6 +44,7 @@ const ModalOverlay = styled.div`
   -webkit-tap-highlight-color: transparent;
 
   .modal {
+    margin-top: -24px;
     display: flex;
     flex-direction: column;
     background-color: #fff;

@@ -1,5 +1,5 @@
 import Modal from './Modal';
-import CreateMakerLog from '../common/CreateMakerLog';
+import CreateMakerLog from '../form/CreateMakerLog';
 import SelectPost from '../common/SelectPost';
 import { useState } from 'react';
 import { useRouter } from 'next/router';

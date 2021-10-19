@@ -4,19 +4,15 @@ import ChipDelete from '../../assets/icons/chip_delete.svg';
 import Select from 'react-select';
 import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 
-const MultiSelectDropDownMenu = ({ placeholder }) => {
+const MultiSelectDropDownMenu = ({ placeholder, last }) => {
   const [options, setOptions] = useState([
     { value: 'insight', label: '인사이트' },
     { value: 'idea', label: '아이디어' },
     { value: 'mvp', label: 'MVP' },
     { value: 'milestone', label: '마일스톤' },
+    { value: 'findteammate', label: '팀원찾기' },
   ]);
-  const [selectedItems, setSelectedItems] = useState([
-    // { value: 'insight', label: '인사이트' },
-    // { value: 'idea', label: '아이디어' },
-    // { value: 'mvp', label: 'MVP' },
-    // { value: 'milestone', label: '마일스톤' },
-  ]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
@@ -67,7 +63,7 @@ const MultiSelectDropDownMenu = ({ placeholder }) => {
 
   return (
     <MultiSelectDropDownContainer ref={ref}>
-      <DropDownHeader onClick={openMenu}>
+      <DropDownHeader last={last} onClick={openMenu}>
         <div className='dropdown-header-wrapper'>
           <div className='dropdown-header-label'>{placeholder}</div>
           <SelectedList>
@@ -109,18 +105,19 @@ const MultiSelectDropDownContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  z-index: 0;
+  width: 100%;
 `;
 
 const DropDownHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 960px;
+  width: 100%;
   padding: 8px;
   padding-right: 0px;
-  border-top: 1px solid #e5e5e7;
-  border-bottom: 1px solid #e5e5e7;
+  border-top: ${({ last }) =>
+    last ? '0px solid #f5f5f7' : '1px solid #f5f5f7'};
+  border-bottom: 1px solid #f5f5f7;
   justify-content: space-between;
   cursor: pointer;
   position: relative;
@@ -145,12 +142,13 @@ const DropDownHeader = styled.div`
 `;
 
 const DropDownListContainer = styled.div`
-  position: relative;
-  width: 960px;
+  width: 100%;
   transform: ${({ $isOpen }) => ($isOpen ? 'scaleY(1)' : 'scaleY(0)')};
   transform-origin: top;
   opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
   transition: transform 0.2s cubic-bezier(0, 1, 0, 1);
+  position: relative;
+  z-index: 100;
 `;
 
 const DropDownList = styled.div`
@@ -209,9 +207,11 @@ const SelectedListItem = styled.div`
       ? '#FFF5E6'
       : value === 'mvp'
       ? '#E8F2FF'
+      : value === 'findteammate'
+      ? '#FFF3F7'
       : '#F0EEFF'};
   border-radius: 8px;
-  margin: 0 4px;
+  margin: 0 3px;
   color: ${({ value }) =>
     value === 'insight'
       ? '#1BCE6B'
@@ -219,6 +219,8 @@ const SelectedListItem = styled.div`
       ? '#FF9700'
       : value === 'mvp'
       ? '#157BFF'
+      : value === 'findteammate'
+      ? '#FD88AA'
       : '#6D55FF'};
   cursor: pointer;
   font-size: 13px;
@@ -236,11 +238,13 @@ const ChipDeleteIcon = styled(ChipDelete)`
       ? '#FF9700'
       : value === 'mvp'
       ? '#157BFF'
+      : value === 'findteammate'
+      ? '#FD88AA'
       : '#6D55FF'};
 `;
 
 const ArrowTriangleDownIcon = styled(ArrowTriangleDown)`
-  fill: #8e8e8e;
+  fill: #c4c4c4;
 `;
 
 export default MultiSelectDropDownMenu;

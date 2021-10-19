@@ -8,6 +8,7 @@ import Globe from '../../assets/icons/globe.svg';
 import Calendar from '../../assets/icons/calendar.svg';
 import DropDownMenu from '../../components/magazine/DropDownMenu';
 import MultiSelectDropDownMenu from '../../components/magazine/MultiSelectDropDownMenu';
+import ToggleButton from '../../components/magazine/ToggleButton';
 
 const MagazinePage = ({ makerlogs }) => {
   const router = useRouter();
@@ -60,12 +61,19 @@ const MagazinePage = ({ makerlogs }) => {
             />
           </div>
         </div>
-        <div className='dropdown-menus'>
+        <div className='multi-select-dropdown-menus'>
           <MultiSelectDropDownMenu
             onChange={(v) => setSelectedItems(v)}
-            value={selectedItems}
             placeholder={'일지 태그:'}
           />
+          <MultiSelectDropDownMenu
+            onChange={(v) => setSelectedItems(v)}
+            placeholder={'토픽:'}
+            last={true}
+          />
+        </div>
+        <div className='toggle-wrapper'>
+          <ToggleButton label={'댓글 허용'} />
         </div>
       </FormContainer>
     </MagazinePageContainer>
@@ -102,6 +110,17 @@ const MagazinePageContainer = styled.div`
   .makerlog-item {
     font-size: 32px;
     line-height: 1.4em;
+  }
+
+  .multi-select-dropdown-menus {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+  }
+
+  .toggle-wrapper {
+    display: flex;
+    margin-top: 32px;
   }
 `;
 

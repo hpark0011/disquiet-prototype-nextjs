@@ -40,7 +40,7 @@ const DropDownMenu = ({
 
   return (
     <DropDownContainer ref={ref}>
-      <div className='label'>{label}</div>
+      {label && <div className='label'>{label}</div>}
       <DropDownHeader onClick={openMenu}>
         <div className='dropdown-header'>
           {icon}
@@ -86,11 +86,14 @@ const DropDownHeader = styled.div`
   align-items: center;
   padding: 4px 4px 4px 6px;
   font-weight: 500;
-  background: #f0eeff;
+  background: #f5f5f7;
   border-radius: 12px;
   cursor: pointer;
-  box-sizing: content-box;
+  box-sizing: border-box;
   width: 100%;
+  &:hover {
+    opacity: 0.7;
+  }
 
   .dropdown-header {
     display: flex;
@@ -101,8 +104,8 @@ const DropDownHeader = styled.div`
     margin-left: 2px;
     font-size: 14px;
     line-height: 1em;
-    color: #6d55ff;
-    font-weight: 500;
+    color: #8e8e8e;
+    font-weight: 400;
   }
 `;
 
@@ -161,7 +164,7 @@ const ArrowTriangleDownIcon = styled(ArrowTriangleDown)`
       ? '#6d55ff'
       : $bgColor === 'pink'
       ? '#fd88aa'
-      : '#707070'};
+      : '#c4c4c4'};
 `;
 
 export default DropDownMenu;
