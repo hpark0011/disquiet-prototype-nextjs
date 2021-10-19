@@ -3,7 +3,7 @@ import CardBodyHeader from './CardBodyHeader';
 import CardBodyBody from './CardBodyBody';
 import CardBodyFooter from './CardBodyFooter';
 
-const CardBody = ({ content, upvote, title, tags, onCardBodyClick }) => {
+const CardBody = ({ content, upvote, title, tags }) => {
   return (
     <Container>
       <CardBodyHeader upvote={upvote} tags={tags} title={title} />
@@ -17,7 +17,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 24px;
   margin-left: 36px;
   transition: all 0.2s ease-in-out;

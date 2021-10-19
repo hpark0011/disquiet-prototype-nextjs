@@ -70,7 +70,7 @@ const Container = styled.div`
   position: fixed;
   z-index: 10;
   top: 0;
-  border-bottom: 1px solid #e5e5e8;
+  border-bottom: 1px solid #eaeaec;
 
   .nav-container {
     display: flex;

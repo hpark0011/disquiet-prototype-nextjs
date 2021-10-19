@@ -1,40 +1,73 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Modal from 'react-modal';
-import MagazineContent from '../../components/magazine/MagazineContent';
 import { useRouter } from 'next/router';
-import { Fragment } from 'react';
-
-Modal.setAppElement('#__next');
+import { useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
+import MagazineFill from '../../assets/icons/magazine_fill.svg';
+import Globe from '../../assets/icons/globe.svg';
+import Calendar from '../../assets/icons/calendar.svg';
+import DropDownMenu from '../../components/magazine/DropDownMenu';
+import MultiSelectDropDownMenu from '../../components/magazine/MultiSelectDropDownMenu';
 
 const MagazinePage = ({ makerlogs }) => {
   const router = useRouter();
 
-  console.log('router::;', router.query);
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+  };
+
+  const [value, setValue] = useState(null);
+  const [secondValue, setSecondValue] = useState(null);
+  const [thirdValue, setThirdValue] = useState(null);
+
+  const [selectedItems, setSelectedItems] = useState([]);
 
   return (
     <MagazinePageContainer>
-      <div className='title'>list of makerlog</div>
-      {makerlogs.map((makerlog) => {
-        const { id, title } = makerlog;
-        return (
-          <Fragment key={id}>
-            <Link href={`/magazine?magazineId=${id}`} as={`/magazine/${id}`}>
-              <a className='makerlog-item'>
-                {id} {title}
-              </a>
-            </Link>
-          </Fragment>
-        );
-      })}
-      <Modal
-        isOpen={!!router.query.magazineId}
-        onRequestClose={() => {
-          router.push('/magazine');
-        }}
-      >
-        <MagazineContent magazineId={router.query.magazineId} />
-      </Modal>
+      <FormContainer onSubmit={onSubmitHandler}>
+        <div className='dropdown-menus'>
+          <div className='dropdown-menu-wrapper'>
+            <DropDownMenu
+              icon={<MagazineFillIcon />}
+              label={'태그'}
+              bgColor={'purple'}
+              onChange={(v) => setValue(v)}
+              placeholder={'디자인'}
+              value={value}
+              options={['디자인', '아이디어', '개발']}
+            />
+          </div>
+          <div className='dropdown-menu-wrapper'>
+            <DropDownMenu
+              icon={<MagazineFillIcon />}
+              label={'태그'}
+              bgColor={'purple'}
+              onChange={(v) => setSecondValue(v)}
+              placeholder={'디자인'}
+              value={secondValue}
+              options={['디자인', '아이디어', '개발']}
+            />
+          </div>
+          <div className='dropdown-menu-wrapper'>
+            <DropDownMenu
+              icon={<MagazineFillIcon />}
+              label={'태그'}
+              bgColor={'purple'}
+              onChange={(v) => setThirdValue(v)}
+              placeholder={'디자인'}
+              value={thirdValue}
+              options={['디자인', '아이디어', '개발']}
+            />
+          </div>
+        </div>
+        <div className='dropdown-menus'>
+          <MultiSelectDropDownMenu
+            onChange={(v) => setSelectedItems(v)}
+            value={selectedItems}
+            placeholder={'일지 태그:'}
+          />
+        </div>
+      </FormContainer>
     </MagazinePageContainer>
   );
 };
@@ -45,6 +78,20 @@ const MagazinePageContainer = styled.div`
   width: 1120px;
   margin: auto;
   margin-top: 72px;
+  background-color: #fff;
+  height: 50vh;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 80px;
+
+  .dropdown-menus {
+    display: flex;
+    margin-top: 32px;
+  }
+
+  .dropdown-menu-wrapper {
+    margin: 0px 12px;
+  }
 
   .title {
     font-weight: 600;
@@ -58,23 +105,13 @@ const MagazinePageContainer = styled.div`
   }
 `;
 
-const StyledModal = styled(Modal)`
-  .ReactModal__Overlay--after-open {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 100;
-    /* background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: saturate(180%) blur(7px);
-    -webkit-tap-highlight-color: transparent; */
-    overflow: scroll;
-    background-color: red;
-  }
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MagazineFillIcon = styled(MagazineFill)`
+  fill: #6d55ff;
 `;
 
 export const getStaticProps = async () => {

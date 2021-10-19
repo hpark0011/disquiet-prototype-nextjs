@@ -4,7 +4,6 @@ import ControllerArrowForward from '../../assets/icons/controller_arrow_forward.
 import ControllerArrowBackward from '../../assets/icons/controller_arrow_backward.svg';
 
 const PostController = ({ inView, isModal }) => {
-  console.log('ismodal', isModal);
   return (
     <Container $isModal={isModal} $inView={inView}>
       <div className='content-title'>디스콰이엇 메이커로그</div>

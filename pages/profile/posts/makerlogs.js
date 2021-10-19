@@ -12,7 +12,6 @@ import { useInView } from 'react-intersection-observer';
 const ProfilePosts = ({ trendingProducts, myMakerlogs }) => {
   const { ref, inView } = useInView();
   const router = useRouter();
-  console.log('profile inview:::', inView);
 
   return (
     <PageContainer>

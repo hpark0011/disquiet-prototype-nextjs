@@ -13,8 +13,6 @@ const HomePage = ({ trendingProducts, makerlogs }) => {
   const router = useRouter();
   const { setTabIndex } = useContext(FeedTabContext);
 
-  console.log('router:::', router);
-
   useEffect(() => {
     router.pathname === '/' &&
       Object.keys(router.query).length === 0 &&

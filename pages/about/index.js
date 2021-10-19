@@ -133,15 +133,12 @@ export const getServerSideProps = async (context) => {
   const { query } = context;
   const { topics } = query;
 
-  console.log('query:::', context);
-
   const queryString = topics ? `?topics=${topics}` : '';
 
   const response = await fetch(`http://localhost:4000/makerlogs${queryString}`);
 
   const data = await response.json();
 
-  console.log('data:::', data);
   return {
     props: {
       makerlogList: data,

@@ -10,7 +10,7 @@ const DropdownMenu = ({ label, icon, bgColor, placeholder }) => {
           {icon}
           <div className={`current-menu-title ${bgColor}`}>{placeholder}</div>
         </div>
-        <ArrowTriangleDownIcon bgColor={bgColor} />
+        <ArrowTriangleDownIcon $bgColor={bgColor} />
       </div>
     </Container>
   );
@@ -76,10 +76,10 @@ const Container = styled.div`
 `;
 
 const ArrowTriangleDownIcon = styled(ArrowTriangleDown)`
-  fill: ${({ bgColor }) =>
-    bgColor === 'purple'
+  fill: ${({ $bgColor }) =>
+    $bgColor === 'purple'
       ? '#6d55ff'
-      : bgColor === 'pink'
+      : $bgColor === 'pink'
       ? '#fd88aa'
       : '#707070'};
 `;

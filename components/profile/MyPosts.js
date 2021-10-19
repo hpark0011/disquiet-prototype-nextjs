@@ -4,7 +4,6 @@ import MyMakerlogs from './MyMakerlogs';
 import MyProducts from './MyProducts';
 
 const MyPosts = ({ postType, error, data, inView }) => {
-  console.log('myposts porifle inveiw:::', inView);
   return (
     <PostsContainer>
       <MyPostsStickyContainer $inView={inView}>
@@ -38,20 +37,6 @@ const PostsContainer = styled.div`
   flex-direction: column;
   position: relative;
   height: 100vh;
-
-  .my-posts-sticky-wrapper {
-    position: sticky;
-    padding-top: 32px;
-    margin-bottom: 8px;
-    top: 48px;
-    z-index: 2;
-    padding-bottom: 12px;
-    background-color: rgba(245, 245, 247, 0.72);
-    backdrop-filter: saturate(180%) blur(20px);
-    transition: all 0.2s ease-in-out;
-    border-bottom: ${({ $inView }) =>
-      $inView ? '1px solid transparent' : '1px solid #ececee'};
-  }
 
   .posts-header {
     display: flex;
@@ -113,7 +98,7 @@ const MyPostsStickyContainer = styled.div`
   margin-bottom: 8px;
   top: 48px;
   z-index: 2;
-  padding-bottom: 16px;
+  padding-bottom: 14px;
   background-color: rgba(245, 245, 247, 0.72);
   backdrop-filter: saturate(180%) blur(20px);
   transition: all 0.2s ease-in-out;

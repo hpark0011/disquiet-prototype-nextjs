@@ -39,7 +39,7 @@ const Container = styled.div`
 
   .border-box {
     padding: 4px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 1rem;
   }
 

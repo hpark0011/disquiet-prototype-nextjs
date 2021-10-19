@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import MagazineContent from '../../../components/magazine/MagazineContent';
 
 const MagazineDetailPage = ({ magazineId }) => {
-  console.log('magazineID:::', magazineId);
   return (
     <MagazineDetailPageContainer>
       <MagazineContent magazineId={magazineId} />
