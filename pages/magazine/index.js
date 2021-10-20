@@ -9,6 +9,7 @@ import Calendar from '../../assets/icons/calendar.svg';
 import DropDownMenu from '../../components/magazine/DropDownMenu';
 import MultiSelectDropDownMenu from '../../components/magazine/MultiSelectDropDownMenu';
 import ToggleButton from '../../components/magazine/ToggleButton';
+import CustomDatePicker from '../../components/calendar/DatePicker';
 
 const MagazinePage = ({ makerlogs }) => {
   const router = useRouter();
@@ -75,6 +76,9 @@ const MagazinePage = ({ makerlogs }) => {
         <div className='toggle-wrapper'>
           <ToggleButton label={'댓글 허용'} />
         </div>
+        <div className='calendar'>
+          <CustomDatePicker />
+        </div>
       </FormContainer>
     </MagazinePageContainer>
   );
@@ -120,6 +124,12 @@ const MagazinePageContainer = styled.div`
 
   .toggle-wrapper {
     display: flex;
+    margin-top: 32px;
+  }
+
+  .calendar {
+    display: flex;
+    flex-direction: column;
     margin-top: 32px;
   }
 `;

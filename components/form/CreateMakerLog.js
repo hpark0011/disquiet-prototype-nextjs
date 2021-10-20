@@ -13,6 +13,7 @@ import ToggleButton from '../magazine/ToggleButton';
 import { useState } from 'react';
 import CircularAdd from '../../assets/icons/circular_add.svg';
 import CircularAddLarge from '../../assets/icons/circular_add_large.svg';
+import DatePicker from '../calendar/DatePicker';
 
 const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
   const {
@@ -50,10 +51,7 @@ const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <div className='header'>
         <ArrowBackwardIcon onClick={onBackwardArrowClick} />
-        <div className='modal-title-wrapper'>
-          <h2 className='modal-title'>9월 10일, 2021년</h2>
-          <ArrowTriangleDownIcon />
-        </div>
+        <DatePicker />
       </div>
       <AddTitleButtonWrapper $isVisible={titleInput} onClick={showTitleInput}>
         <CircularAddLargeIcon />
