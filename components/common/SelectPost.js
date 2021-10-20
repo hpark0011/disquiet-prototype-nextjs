@@ -71,7 +71,7 @@ const Container = styled.div`
     box-sizing: border-box;
     cursor: pointer;
 
-    font-size: 14px;
+    font-size: 15px;
     color: #707070;
     transition: all 0.2s ease-in-out;
 

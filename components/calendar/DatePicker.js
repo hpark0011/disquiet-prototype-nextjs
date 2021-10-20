@@ -40,6 +40,7 @@ const CustomDatePicker = () => {
         renderDayContents={DayContents}
         showPopperArrow={false}
         disabledKeyboardNavigation
+        maxDate={new Date()}
       />
     </StyledWrapper>
   );
@@ -53,7 +54,7 @@ const StyledWrapper = styled.div`
     border: 1px solid #f5f5f7;
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.14);
     border: none;
   }
 

@@ -1,17 +1,11 @@
 import styled from 'styled-components';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import ChipDelete from '../../assets/icons/chip_delete.svg';
-import Select from 'react-select';
 import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 
-const MultiSelectDropDownMenu = ({ placeholder, last }) => {
-  const [options, setOptions] = useState([
-    { value: 'insight', label: '인사이트' },
-    { value: 'idea', label: '아이디어' },
-    { value: 'mvp', label: 'MVP' },
-    { value: 'milestone', label: '마일스톤' },
-    { value: 'findteammate', label: '팀원찾기' },
-  ]);
+const MultiSelectDropDownMenu = ({ placeholder, last, optionList }) => {
+  console.log('optionList:::', optionList);
+  const [options, setOptions] = useState(optionList);
   const [selectedItems, setSelectedItems] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +69,7 @@ const MultiSelectDropDownMenu = ({ placeholder, last }) => {
                   value={value}
                   key={value}
                 >
-                  # {label}
+                  {label}
                   <ChipDeleteIcon value={value} />
                 </SelectedListItem>
               );
@@ -86,14 +80,15 @@ const MultiSelectDropDownMenu = ({ placeholder, last }) => {
       </DropDownHeader>
       <DropDownListContainer $isOpen={isOpen}>
         <DropDownList>
-          {options.map((option) => {
-            const { value, label } = option;
-            return (
-              <ListItem key={value} onClick={() => onOptionClick(value)}>
-                {label}
-              </ListItem>
-            );
-          })}
+          {options &&
+            options.map((option) => {
+              const { value, label } = option;
+              return (
+                <ListItem key={value} onClick={() => onOptionClick(value)}>
+                  {label}
+                </ListItem>
+              );
+            })}
         </DropDownList>
       </DropDownListContainer>
     </MultiSelectDropDownContainer>
@@ -164,6 +159,8 @@ const DropDownList = styled.div`
   position: fixed;
   top: 8px;
   background-color: #fff;
+  max-height: 208px;
+  overflow-y: scroll;
 `;
 
 const ListItem = styled.div`
@@ -224,6 +221,7 @@ const SelectedListItem = styled.div`
       : '#6D55FF'};
   cursor: pointer;
   font-size: 13px;
+  line-height: 13px;
 
   &:hover {
     opacity: 0.7;

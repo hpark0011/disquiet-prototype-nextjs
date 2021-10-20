@@ -6,6 +6,7 @@ const MakerlogTextarea = ({ register }) => {
     <Container>
       <Textarea
         placeholder={'프로덕트에 대해서 기록해보세요.'}
+        maxRows='12'
         {...register('makerlogTextContent', { required: true })}
       />
     </Container>
@@ -30,6 +31,8 @@ const Textarea = styled(TextareaAutosize)`
   border: none;
   outline: none;
   font-family: 'Helvetica Neue';
+  max-height: 528px;
+  overflow-y: scroll;
 
   &::placeholder {
     font-size: 16px;

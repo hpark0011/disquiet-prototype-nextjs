@@ -10,10 +10,11 @@ import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 import MultiSelectDropDownMenu from '../magazine/MultiSelectDropDownMenu';
 import DropDownMenu from '../magazine/DropDownMenu';
 import ToggleButton from '../magazine/ToggleButton';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import CircularAdd from '../../assets/icons/circular_add.svg';
 import CircularAddLarge from '../../assets/icons/circular_add_large.svg';
 import DatePicker from '../calendar/DatePicker';
+import { TopicsContext } from '../../store/topic-context';
 
 const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
   const {
@@ -47,6 +48,12 @@ const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
     setShowTopicSelector(true);
   };
 
+  const { topics } = useContext(TopicsContext);
+
+  const topicsOptions = topics.map((topic) => {
+    return { value: topic.queryString, label: topic.topicName };
+  });
+
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <div className='header'>
@@ -71,7 +78,16 @@ const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
         </TitleInputWrapper>
       )}
       <MakerlogTextarea register={register} />
-      <MultiSelectDropDownMenu placeholder={'일지 태그:'} />
+      <MultiSelectDropDownMenu
+        placeholder={'일지 태그:'}
+        optionList={[
+          { value: 'insight', label: '# 인사이트' },
+          { value: 'idea', label: '# 아이디어' },
+          { value: 'mvp', label: '# MVP' },
+          { value: 'milestone', label: '# 마일스톤' },
+          { value: 'findteammate', label: '# 팀원찾기' },
+        ]}
+      />
       <AddTopics onClick={addTopic} $isVisible={showTopicSelector}>
         <CircularAddIcon />
         <div className='add-topics-label'>토픽 설정하기</div>
@@ -85,7 +101,11 @@ const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
           >
             ✕
           </CloseTopic>
-          <MultiSelectDropDownMenu last placeholder={'토픽:'} />
+          <MultiSelectDropDownMenu
+            last
+            placeholder={'토픽:'}
+            optionList={topicsOptions}
+          />
         </TopicSelectorWrapper>
       )}
       <div className='footer'>
