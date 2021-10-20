@@ -61,8 +61,10 @@ const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
         <DatePicker />
       </div>
       <AddTitleButtonWrapper $isVisible={titleInput} onClick={showTitleInput}>
-        <CircularAddLargeIcon />
-        <div className='add-title-button-label'>제목 추가하기</div>
+        <CircularAddLargeIconWrapper>
+          <CircularAddLargeIcon />
+        </CircularAddLargeIconWrapper>
+        <AddTitleButtonLabel>제목 추가하기</AddTitleButtonLabel>
       </AddTitleButtonWrapper>
       {titleInput && (
         <TitleInputWrapper>
@@ -89,8 +91,10 @@ const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
         ]}
       />
       <AddTopics onClick={addTopic} $isVisible={showTopicSelector}>
-        <CircularAddIcon />
-        <div className='add-topics-label'>토픽 설정하기</div>
+        <CircularAddIconWrapper>
+          <CircularAddIcon />
+        </CircularAddIconWrapper>
+        <AddTopicsLabel>토픽 설정하기</AddTopicsLabel>
       </AddTopics>
       {showTopicSelector && (
         <TopicSelectorWrapper>
@@ -186,16 +190,8 @@ const ArrowBackwardIcon = styled(ArrowBackward)`
   }
 `;
 
-const MagazineFillIcon = styled(MagazineFill)`
-  fill: #6d55ff;
-`;
-
 const GlobeIcon = styled(Globe)`
   fill: #c4c4c4;
-`;
-
-const CalendarIcon = styled(Calendar)`
-  fill: #fd88aa;
 `;
 
 const Divider = styled.div`
@@ -220,12 +216,6 @@ const SubmitButton = styled.button`
   }
 `;
 
-const ArrowTriangleDownIcon = styled(ArrowTriangleDown)`
-  fill: #c4c4c4;
-`;
-
-const CircularAddIcon = styled(CircularAdd)``;
-
 const AddTopics = styled.div`
   display: ${({ $isVisible }) => ($isVisible ? 'none' : 'flex')};
   justify-content: center;
@@ -238,16 +228,41 @@ const AddTopics = styled.div`
   &:hover {
     background-color: #fafafc;
   }
+`;
 
-  .add-topics-label {
-    font-size: 13px;
-    font-weight: 400;
-    color: #c4c4c4;
-    margin-left: 4px;
+const AddTopicsLabel = styled.div`
+  font-size: 13px;
+  font-weight: 400;
+  color: #8e8e8e;
+  margin-left: 4px;
+  transition: all 0.2s ease-in-out;
 
-    &:hover {
-      color: #6d55ff;
-    }
+  ${AddTopics}:hover & {
+    color: #6d55ff;
+  }
+`;
+
+const CircularAddIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  border: 1px solid #c4c4c4;
+  transition: all 0.2s ease-in-out;
+  width: 17px;
+  height: 17px;
+
+  ${AddTopics}:hover & {
+    border: 1px solid #6d55ff;
+  }
+`;
+
+const CircularAddIcon = styled(CircularAdd)`
+  fill: #c4c4c4;
+  transition: all 0.2s ease-in-out;
+
+  ${AddTopics}:hover & {
+    fill: #6d55ff;
   }
 `;
 
@@ -257,22 +272,45 @@ const AddTitleButtonWrapper = styled.div`
   margin-bottom: 6px;
   width: 100%;
   cursor: pointer;
+`;
 
-  .add-title-button-label {
-    padding-top: 4px;
-    font-size: 20px;
-    margin-bottom: 2px;
-    color: #c4c4c4;
-    margin-left: 6px;
-    font-weight: 400;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      color: #6d55ff;
-    }
+const AddTitleButtonLabel = styled.div`
+  padding-top: 4px;
+  font-size: 20px;
+  margin-bottom: 2px;
+  color: #c4c4c4;
+  margin-left: 6px;
+  font-weight: 400;
+  transition: all 0.2s ease-in-out;
+
+  ${AddTitleButtonWrapper}:hover & {
+    color: #6d55ff;
   }
 `;
 
-const CircularAddLargeIcon = styled(CircularAddLarge)``;
+const CircularAddLargeIcon = styled(CircularAddLarge)`
+  fill: #c4c4c4;
+  transition: all 0.2s ease-in-out;
+
+  ${AddTitleButtonWrapper}:hover & {
+    fill: #6d55ff;
+  }
+`;
+
+const CircularAddLargeIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c4c4c4;
+  transition: all 0.2s ease-in-out;
+  border-radius: 32px;
+  width: 24px;
+  height: 24px;
+
+  ${AddTitleButtonWrapper}:hover & {
+    border: 1px solid #6d55ff;
+  }
+`;
 
 const TitleInput = styled.input`
   width: 100%;
