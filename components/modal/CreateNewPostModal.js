@@ -23,7 +23,7 @@ const CreateNewPostModal = ({ isModalOpen, onCloseModal }) => {
         <CreateMakerLog
           pageCount={pageCount}
           setPageCount={setPageCount}
-          onClose={closeModalWithPage}
+          // onClose={closeModalWithPage}
         />
       ) : null}
     </Modal>

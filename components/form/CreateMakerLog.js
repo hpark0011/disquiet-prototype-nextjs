@@ -1,22 +1,19 @@
 import styled from 'styled-components';
-import ArrowBackward from '../../assets/icons/arrow_backward.svg';
-import MagazineFill from '../../assets/icons/magazine_fill.svg';
-import Globe from '../../assets/icons/globe.svg';
-import Calendar from '../../assets/icons/calendar.svg';
-import MakerlogTextarea from '../common/MakerlogTextarea';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
-import MultiSelectDropDownMenu from '../magazine/MultiSelectDropDownMenu';
-import DropDownMenu from '../magazine/DropDownMenu';
-import ToggleButton from '../magazine/ToggleButton';
-import { useState, useContext } from 'react';
+import { TopicsContext } from '../../store/topic-context';
+import MakerlogTextarea from '../common/MakerlogTextarea';
+import MultiSelectDropDownMenu from './MultiSelectDropDownMenu';
+import DropDownMenu from './DropDownMenu';
+import ToggleButton from './ToggleButton';
+import DatePicker from '../calendar/DatePicker';
+import Globe from '../../assets/icons/globe.svg';
 import CircularAdd from '../../assets/icons/circular_add.svg';
 import CircularAddLarge from '../../assets/icons/circular_add_large.svg';
-import DatePicker from '../calendar/DatePicker';
-import { TopicsContext } from '../../store/topic-context';
+import ArrowBackward from '../../assets/icons/arrow_backward.svg';
 
-const CreateMakerLog = ({ pageCount, setPageCount, onClose }) => {
+const CreateMakerLog = ({ pageCount, setPageCount }) => {
   const {
     register,
     handleSubmit,
@@ -231,10 +228,11 @@ const AddTopics = styled.div`
 `;
 
 const AddTopicsLabel = styled.div`
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 15px;
   font-weight: 400;
   color: #8e8e8e;
-  margin-left: 4px;
+  margin-left: 6px;
   transition: all 0.2s ease-in-out;
 
   ${AddTopics}:hover & {

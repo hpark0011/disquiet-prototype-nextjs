@@ -6,9 +6,9 @@ import TextareaAutosize from 'react-textarea-autosize';
 import MagazineFill from '../../assets/icons/magazine_fill.svg';
 import Globe from '../../assets/icons/globe.svg';
 import Calendar from '../../assets/icons/calendar.svg';
-import DropDownMenu from '../../components/magazine/DropDownMenu';
-import MultiSelectDropDownMenu from '../../components/magazine/MultiSelectDropDownMenu';
-import ToggleButton from '../../components/magazine/ToggleButton';
+import DropDownMenu from '../../components/form/DropDownMenu';
+import MultiSelectDropDownMenu from '../../components/form/MultiSelectDropDownMenu';
+import ToggleButton from '../../components/form/ToggleButton';
 import CustomDatePicker from '../../components/calendar/DatePicker';
 
 const MagazinePage = ({ makerlogs }) => {
