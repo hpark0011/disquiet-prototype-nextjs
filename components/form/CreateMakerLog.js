@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { useState, useContext } from 'react';
+import styled, { ThemeConsumer } from 'styled-components';
+import { useState, useContext, useReducer } from 'react';
 import { useRouter } from 'next/router';
 import { TopicsContext } from '../../store/topic-context';
 import { MakerlogTagContext } from '../../store/makerlog-tag-context';
@@ -11,10 +11,11 @@ import MultiSelectDropDownMenu from './MultiSelectDropDownMenu';
 import TopicsSelector from './TopicsSelector';
 import CreateMakerlogFooter from './CreateMakerlogFooter';
 
-const CreateMakerLog = ({ pageCount, setPageCount }) => {
+const CreateMakerLog = ({ pageCount, setPageCount, onCloseModal }) => {
   const router = useRouter();
   const { topics } = useContext(TopicsContext);
   const { makerlogTagList } = useContext(MakerlogTagContext);
+  const { makerlogs, setMakerlogs } = useContext(MakerlogContext);
 
   //converting topic obejct into MultiSelectDropDownMenu compatible object with value and label as keys.
   const topicsOptions = topics.map((topic) => {
@@ -26,11 +27,13 @@ const CreateMakerLog = ({ pageCount, setPageCount }) => {
   const [makerlogContent, setMakerlogContent] = useState('');
   const [makerlogTags, setMakerlogTags] = useState([]);
   const [makerlogTopics, setMakerlogTopics] = useState([]);
-  const [shareSettings, setShareSettings] = useState('전체 공개');
+  const [shareSettings, setShareSettings] = useState({
+    label: '전체공개',
+    value: 'all',
+  });
   const [commentSettings, setCommentSettings] = useState(true);
   const [showTopicSelector, setShowTopicSelector] = useState(false);
   const [titleInputVisible, setTitleInputVisible] = useState(false);
-  const [makerlogs, setMakerlogs] = useState([]);
 
   const onBackwardArrowClick = () => {
     setPageCount(pageCount - 1);
@@ -55,9 +58,23 @@ const CreateMakerLog = ({ pageCount, setPageCount }) => {
       tags: makerlogTags,
       topics: makerlogTopics,
       shareSettings: shareSettings,
+      commentSettings: commentSettings,
     };
     const newMakerlogs = [...makerlogs, newMakerlog];
     setMakerlogs(newMakerlogs);
+    setStartDate(new Date());
+    setMakerlogTitle('');
+    setMakerlogContent('');
+    setMakerlogTags([]);
+    setMakerlogTopics([]);
+    setShareSettings({
+      label: '전체공개',
+      value: 'all',
+    });
+    setCommentSettings(true);
+    setShowTopicSelector(false);
+    setTitleInputVisible(false);
+    onCloseModal();
   };
 
   return (

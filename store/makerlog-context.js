@@ -4,12 +4,14 @@ const MakerlogContext = createContext();
 
 const MakerlogContextProvider = ({ children }) => {
   const [makerlogs, setMakerlogs] = useState([]);
-  const onMakerlogFormSubmitHandler = (newMakerlogs) => {
-    setMakerlogs(newMakerlogs);
+
+  const makerlogContext = {
+    makerlogs,
+    setMakerlogs,
   };
 
   return (
-    <MakerlogContext.Provider value={{ makerlogs }}>
+    <MakerlogContext.Provider value={makerlogContext}>
       {children}
     </MakerlogContext.Provider>
   );

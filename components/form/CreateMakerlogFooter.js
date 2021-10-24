@@ -19,7 +19,10 @@ const CreateMakerlogFooter = ({
           onChange={(v) => setShareSettings(v)}
           placeholder={'전체 공개'}
           value={shareSettings}
-          options={['전체 공개', '나만 보기']}
+          options={[
+            { label: '전체 공개', value: 'all' },
+            { label: '나만 보기', value: 'private' },
+          ]}
         />
         <Divider />
         <ToggleButton

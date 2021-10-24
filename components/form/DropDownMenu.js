@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
 import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
-import ReactDOM from 'react-dom';
 
 const DropDownMenu = ({
   label,
@@ -44,7 +43,9 @@ const DropDownMenu = ({
       <DropDownHeader onClick={openMenu}>
         <div className='dropdown-header'>
           {icon}
-          <div className='dropdown-header-label'>{value || placeholder}</div>
+          <div className='dropdown-header-label'>
+            {value.label || placeholder}
+          </div>
         </div>
         <ArrowTriangleDownIcon $bgColor={bgColor} />
       </DropDownHeader>
@@ -52,9 +53,10 @@ const DropDownMenu = ({
       <DropDownListContainer $isOpen={isOpen}>
         <DropDownList>
           {options.map((option) => {
+            const { label, value } = option;
             return (
-              <ListItem key={option} onClick={() => onOptionClick(option)}>
-                {option}
+              <ListItem key={value} onClick={() => onOptionClick(value)}>
+                {label}
               </ListItem>
             );
           })}
