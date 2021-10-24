@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import TextareaAutosize from 'react-textarea-autosize';
 
-const MakerlogTextarea = ({ register }) => {
+const MakerlogTextarea = ({ makerlogContent, setMakerlogContent }) => {
   return (
-    <Container>
+    <MakerlogTextareaContainer>
       <Textarea
         placeholder={'프로덕트에 대해서 기록해보세요.'}
         maxRows='12'
-        {...register('makerlogTextContent', { required: true })}
+        value={makerlogContent}
+        onChange={(e) => setMakerlogContent(e.target.value)}
       />
-    </Container>
+    </MakerlogTextareaContainer>
   );
 };
 
-const Container = styled.div`
+const MakerlogTextareaContainer = styled.div`
   display: flex;
   width: 100%;
   min-height: 240px;

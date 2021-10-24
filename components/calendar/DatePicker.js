@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
 import CalendarInput from './CalendarInput';
 import CalendarHeader from './CalendarHeader';
 import DayContents from './DayContents';
 
-const CustomDatePicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
-
+const CustomDatePicker = ({ startDate, setStartDate }) => {
   return (
     <StyledWrapper>
       <DatePicker

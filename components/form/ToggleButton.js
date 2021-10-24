@@ -1,12 +1,16 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const ToggleButton = ({ label }) => {
-  const [toggle, setToggle] = useState(false);
+const ToggleButton = ({ label, toggleItem, setToggleItem }) => {
+  const [toggle, setToggle] = useState(toggleItem);
 
   const onToggleClick = () => {
     setToggle((prev) => !prev);
   };
+
+  useEffect(() => {
+    setToggleItem(toggle);
+  }, [toggle]);
 
   return (
     <ToggleButtonContainer>

@@ -1,47 +1,9 @@
 import styled from 'styled-components';
 import { useReducer, useState, useEffect } from 'react';
-
-const initialState = [
-  { username: 'jimmy', email: 'email@email', password: 'password' },
-];
-
-const reducer = (prevState, action) => {
-  switch (action.type) {
-    case 'ON_USERNAME_CHANGE':
-      return { ...prevState, username: action.value };
-    case 'ON_EMAIL_CHANGE':
-      return { ...prevState, email: action.value };
-    case 'ON_PASSWORD_CHANGE':
-      return { ...prevState, password: action.value };
-    case 'ON_SUBMIT':
-      return {};
-    default:
-      throw new Error();
-  }
-};
+import { initialState, reducer } from './Reducer';
 
 const ReducerForm = () => {
-  const [user, dispatch] = useReducer(reducer, initialState);
-  const [users, setUsers] = useState([]);
-
-  // const [user, setUser] = useState({
-  //   username,
-  //   email,
-  //   password,
-  // });
-
-  const onSubmitHandler = () => {
-    const newUser = {
-      username: username,
-      email: email,
-      password: password,
-    };
-    setUser(newUser);
-    setUsers([...users, user]);
-  };
-
-  console.log('user:::', user);
-  console.log('users::::', users);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <ReducerFormContainer>
@@ -53,11 +15,11 @@ const ReducerForm = () => {
             onChange={(e) =>
               dispatch({
                 type: 'ON_USERNAME_CHANGE',
-                value: e.target.value,
+                payload: e.target.value,
                 key: 'username',
               })
             }
-            value={user.username}
+            value={state.user.username}
           />
         </div>
         <div className='input'>
@@ -67,11 +29,11 @@ const ReducerForm = () => {
             onChange={(e) =>
               dispatch({
                 type: 'ON_EMAIL_CHANGE',
-                value: e.target.value,
+                payload: e.target.value,
                 key: 'email',
               })
             }
-            value={user.email}
+            value={state.user.email}
           />
         </div>
         <div className='input'>
@@ -81,17 +43,41 @@ const ReducerForm = () => {
             onChange={(e) =>
               dispatch({
                 type: 'ON_PASSWORD_CHANGE',
-                value: e.target.value,
+                payload: e.target.value,
                 key: 'password',
               })
             }
-            value={user.password}
+            value={state.user.password}
           />
         </div>
       </div>
-      <button type='submit' onClick={() => dispatch({ type: 'ON_SUBMIT' })}>
+      <button
+        type='submit'
+        onClick={() =>
+          dispatch({
+            type: 'ON_SUBMIT',
+            payload: {
+              username: state.user.username,
+              email: state.user.email,
+              password: state.user.password,
+              id: new Date(),
+            },
+          })
+        }
+      >
         submit
       </button>
+      {state.users.length >= 0 &&
+        state.users.map((user) => {
+          const { username, email, password, id } = user;
+          return (
+            <div key={id} className='card-wrapper'>
+              <div className='element'>username:{username}</div>
+              <div className='element'>email: {email}</div>
+              <div className='element'>password:{password}</div>
+            </div>
+          );
+        })}
     </ReducerFormContainer>
   );
 };
@@ -118,6 +104,18 @@ const ReducerFormContainer = styled.div`
   button {
     padding: 8px 16px;
     font-size: 16px;
+  }
+
+  .card-wrapper {
+    display: flex;
+    padding: 12px;
+    background-color: #fff;
+    margin-bottom: 32px;
+    border-radius: 24px;
+  }
+
+  .element {
+    margin: 4px;
   }
 `;
 

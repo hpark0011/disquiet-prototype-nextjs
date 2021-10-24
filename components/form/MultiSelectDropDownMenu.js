@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ChipDelete from '../../assets/icons/chip_delete.svg';
 import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 
-const MultiSelectDropDownMenu = ({ placeholder, last, optionList }) => {
-  console.log('optionList:::', optionList);
+const MultiSelectDropDownMenu = ({
+  placeholder,
+  last,
+  optionList,
+  setSelection,
+}) => {
   const [options, setOptions] = useState(optionList);
   const [selectedItems, setSelectedItems] = useState([]);
-
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
 
@@ -23,6 +26,10 @@ const MultiSelectDropDownMenu = ({ placeholder, last, optionList }) => {
     setOptions(newOptions);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    setSelection(selectedItems);
+  }, [selectedItems]);
 
   const deleteSelectedListItem = (value, e) => {
     const newSelectedItems = selectedItems.filter(
