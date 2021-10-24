@@ -1,5 +1,5 @@
-import styled, { ThemeConsumer } from 'styled-components';
-import { useState, useContext, useReducer } from 'react';
+import styled from 'styled-components';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { TopicsContext } from '../../store/topic-context';
 import { MakerlogTagContext } from '../../store/makerlog-tag-context';
