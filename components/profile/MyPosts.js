@@ -5,6 +5,7 @@ import MyProducts from './MyProducts';
 import Link from 'next/link';
 import useModal from '../../hook/useModal';
 import CreateNewPostModal from '../modal/CreateNewPostModal';
+import PostTypeDropdownMenu from './PostTypeDropdownMenu';
 import { useRouter } from 'next/router';
 
 const MyPosts = ({ postType, error, data, inView }) => {
@@ -15,11 +16,12 @@ const MyPosts = ({ postType, error, data, inView }) => {
     <PostsContainer>
       <MyPostsStickyContainer $inView={inView}>
         <div className='posts-header'>
-          <div className='title-wrapper'>
+          <PostTypeDropdownMenu />
+          {/* <div className='title-wrapper'>
             {postType === 'myMakerlogs' && '메이커로그'}
             {postType === 'myProducts' && '프로덕트'}
             <ArrowTriangleDownIcon />
-          </div>
+          </div> */}
           <Link href={router.asPath}>
             <a className='button' onClick={onOpenModal}>
               새 포스트
@@ -60,14 +62,14 @@ const PostsContainer = styled.div`
     align-items: center;
   }
 
-  .title-wrapper {
+  /* .title-wrapper {
     display: flex;
     align-items: center;
     font-size: 18px;
     font-weight: 500;
     line-height: 1em;
     cursor: pointer;
-  }
+  } */
 
   .button {
     display: flex;
