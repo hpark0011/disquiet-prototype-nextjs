@@ -8,8 +8,11 @@ import BellIcon from '../../assets/icons/bell_fill.svg';
 import profile_photo from '../../assets/images/profile-photo.jpg';
 import CreateNewPostModal from '../modal/CreateNewPostModal';
 import useModal from '../../hook/useModal';
+import { useRouter } from 'next/router';
 
 const MainNavigation = () => {
+  const router = useRouter();
+
   const [isModalOpen, onOpenModal, onCloseModal] = useModal();
 
   return (
@@ -33,7 +36,7 @@ const MainNavigation = () => {
           <div className='notification-button'>
             <BellIcon />
           </div>
-          <Link href='/' as='/create-post'>
+          <Link href={router.asPath}>
             <a className='button--cta' onClick={onOpenModal}>
               <NewPostIcon />
               <div className='text'>새 포스트</div>
@@ -66,7 +69,7 @@ const Container = styled.div`
   height: 48px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.72);
-  backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px) brightness(1.1);
   position: fixed;
   z-index: 10;
   top: 0;

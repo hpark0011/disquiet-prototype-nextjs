@@ -103,6 +103,7 @@ const CreateMakerLog = ({ pageCount, setPageCount, onCloseModal }) => {
       <TopicsSelector
         addTopic={addTopic}
         showTopicSelector={showTopicSelector}
+        setShowTopicSelector={setShowTopicSelector}
         topicsOptions={topicsOptions}
         setMakerlogTopics={setMakerlogTopics}
       />

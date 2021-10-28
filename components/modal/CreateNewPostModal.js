@@ -9,7 +9,7 @@ const CreateNewPostModal = ({ isModalOpen, onCloseModal }) => {
   const [pageCount, setPageCount] = useState(1);
 
   const closeModalWithPage = () => {
-    router.push('/');
+    router.push(router.asPath);
     onCloseModal();
     setPageCount(1);
   };

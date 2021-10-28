@@ -3,13 +3,15 @@ import PencilIcon from '../../assets/icons/pencil.svg';
 import Link from 'next/link';
 import CreateNewPostModal from '../modal/CreateNewPostModal';
 import useModal from '../../hook/useModal';
+import { useRouter } from 'next/router';
 
 const CreateNewPost = () => {
+  const router = useRouter();
   const [isModalOpen, onOpenModal, onCloseModal] = useModal();
 
   return (
     <>
-      <Link href='/' as='/create-post' passHref>
+      <Link href={router.asPath} passHref>
         <CreatePostContainer onClick={onOpenModal}>
           <div className='text'>프로덕트 빌딩 과정을 기록해보세요.</div>
           <div className='button-circular'>

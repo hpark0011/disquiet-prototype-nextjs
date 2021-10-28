@@ -29,6 +29,9 @@ const TitleInput = ({
               setMakerlogTitle(e.target.value);
             }}
           />{' '}
+          {makerlogTitle.length > 100 && (
+            <div className='title-warning'>100자 이내로 적어주세요.</div>
+          )}
           <div
             className='close-title-input'
             onClick={() => {
@@ -107,6 +110,17 @@ const TitleInputWrapper = styled.div`
     &:hover {
       opacity: 0.7;
     }
+  }
+
+  .title-warning {
+    color: red;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    white-space: nowrap;
+    margin-left: 8px;
   }
 `;
 

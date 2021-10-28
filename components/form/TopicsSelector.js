@@ -6,6 +6,7 @@ import CircularAdd from '../../assets/icons/circular_add.svg';
 const TopicsSelector = ({
   addTopic,
   showTopicSelector,
+  setShowTopicSelector,
   topicsOptions,
   setMakerlogTopics,
 }) => {

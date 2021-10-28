@@ -27,7 +27,7 @@ const SearchContainer = styled.div`
     outline: none;
     font-size: 14px;
     ::placeholder {
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.6em;
       color: #8e8e8e;
     }

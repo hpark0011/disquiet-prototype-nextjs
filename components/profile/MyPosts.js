@@ -2,8 +2,17 @@ import styled from 'styled-components';
 import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 import MyMakerlogs from './MyMakerlogs';
 import MyProducts from './MyProducts';
+import Link from 'next/link';
+import useModal from '../../hook/useModal';
+import CreateNewPostModal from '../modal/CreateNewPostModal';
+import { useRouter } from 'next/router';
 
 const MyPosts = ({ postType, error, data, inView }) => {
+  const [isModalOpen, onOpenModal, onCloseModal] = useModal();
+  const router = useRouter();
+
+  console.log('router:::', router.asPath);
+
   return (
     <PostsContainer>
       <MyPostsStickyContainer $inView={inView}>
@@ -13,7 +22,11 @@ const MyPosts = ({ postType, error, data, inView }) => {
             {postType === 'myProducts' && '프로덕트'}
             <ArrowTriangleDownIcon />
           </div>
-          <div className='button'>새 포스트</div>
+          <Link href={router.asPath}>
+            <a className='button' onClick={onOpenModal}>
+              새 포스트
+            </a>
+          </Link>
         </div>
         <div className='filters'>
           <div className='filter'>
@@ -28,6 +41,11 @@ const MyPosts = ({ postType, error, data, inView }) => {
       </MyPostsStickyContainer>
       {postType === 'myMakerlogs' && <MyMakerlogs myMakerlogs={data} />}
       {postType === 'myProducts' && <MyProducts myProducts={data} />}
+
+      <CreateNewPostModal
+        isModalOpen={isModalOpen}
+        onCloseModal={onCloseModal}
+      />
     </PostsContainer>
   );
 };

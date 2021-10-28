@@ -10,7 +10,7 @@ const SelectPost = ({ pageCount, setPageCount }) => {
   const router = useRouter();
 
   const onMakerlogClick = () => {
-    router.push('/', '/create-post/makerlog', { shallow: true });
+    router.push(router.asPath);
     setPageCount(pageCount + 1);
   };
 
@@ -23,14 +23,14 @@ const SelectPost = ({ pageCount, setPageCount }) => {
           메이커일지 기록하기
           <ArrowRightCircle />
         </div>
-        <Link href='/' as='/create-post/share-product'>
+        <Link href={router.asPath}>
           <a className='select-post'>
             <PlusIcon />
             프로덕트 공유하기
             <ArrowRightCircle />
           </a>
         </Link>
-        <Link href='/' as='/create-post/ask-community'>
+        <Link href={router.asPath}>
           <a className='select-post'>
             <QuestionMarkBubbleIcon />
             커뮤니티에 질문하기
