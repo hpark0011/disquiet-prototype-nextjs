@@ -11,8 +11,6 @@ const MyPosts = ({ postType, error, data, inView }) => {
   const [isModalOpen, onOpenModal, onCloseModal] = useModal();
   const router = useRouter();
 
-  console.log('router:::', router.asPath);
-
   return (
     <PostsContainer>
       <MyPostsStickyContainer $inView={inView}>

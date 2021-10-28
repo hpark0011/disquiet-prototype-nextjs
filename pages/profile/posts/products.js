@@ -5,7 +5,7 @@ import MyPosts from '../../../components/profile/MyPosts';
 import MainLayout from '../../../components/layout/MainLayout';
 import { useState, useEffect } from 'react';
 import { GraphQLClient } from 'graphql-request';
-import { GET_TRENDING_PRODUCTS } from '../../graphql/posts';
+import { GET_TRENDING_PRODUCTS } from '../../../graphql/posts';
 
 const ProfilePosts = ({ trendingProducts }) => {
   const [myProducts, setMyProducts] = useState(null);
