@@ -6,13 +6,17 @@ import MainLayout from '../../../components/layout/MainLayout';
 import { useState, useEffect } from 'react';
 import { GraphQLClient } from 'graphql-request';
 import { GET_TRENDING_PRODUCTS } from '../../../graphql/posts';
+import { useInView } from 'react-intersection-observer';
 
 const ProfilePosts = ({ trendingProducts }) => {
   const [myProducts, setMyProducts] = useState(null);
+  const { ref, inView } = useInView();
 
   useEffect(() => {
     const getMyProducts = async () => {
       const response = await fetch('http://localhost:4000/myProducts');
+
+      console.log('response:::', response);
       const data = await response.json();
       setMyProducts(data);
     };
@@ -20,12 +24,61 @@ const ProfilePosts = ({ trendingProducts }) => {
     getMyProducts();
   }, []);
 
+  const tempMyProducts = [
+    {
+      id: 1,
+      name: '디스콰이엇',
+      url_slug: 'disquiet',
+      is_approved: true,
+      approved_at: new Date(),
+    },
+    {
+      id: 2,
+      name: '디스콰이엇',
+      url_slug: 'disquiet',
+      is_approved: true,
+      approved_at: new Date(),
+    },
+    {
+      id: 3,
+      name: '디스콰이엇',
+      url_slug: 'disquiet',
+      is_approved: true,
+      approved_at: new Date(),
+    },
+    {
+      id: 4,
+      name: '디스콰이엇',
+      url_slug: 'disquiet',
+      is_approved: true,
+      approved_at: new Date(),
+    },
+    {
+      id: 5,
+      name: '디스콰이엇',
+      url_slug: 'disquiet',
+      is_approved: true,
+      approved_at: new Date(),
+    },
+    {
+      id: 6,
+      name: '디스콰이엇',
+      url_slug: 'disquiet',
+      is_approved: true,
+      approved_at: new Date(),
+    },
+  ];
+
   return (
     <PageContainer>
       <MainLayout trendingProducts={trendingProducts}>
         <ProfileDetailInfo />
-        <ProfileTabs />
-        <MyPosts postType={'myProducts'} data={myProducts} />
+        <ProfileTabs inViewRef={ref} />
+        <MyPosts
+          postType={'myProducts'}
+          data={tempMyProducts}
+          inView={inView}
+        />
       </MainLayout>
     </PageContainer>
   );

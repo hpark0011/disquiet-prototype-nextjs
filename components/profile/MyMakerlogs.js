@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import MyCard from './MyCard';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 const myProfile = {
   id: 'hpark',

@@ -6,8 +6,15 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 const Modal = ({ isModalOpen, onCloseModal, children, title }) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
+  const handleKeydown = (e) => {
+    if (e.key === 'Escape') {
+      onCloseModal();
+    }
+  };
+
   useEffect(() => {
     setIsBrowser(true);
+    document.addEventListener('keydown', handleKeydown);
   }, []);
 
   const modalContent = isModalOpen ? (

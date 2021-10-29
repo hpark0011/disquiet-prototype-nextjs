@@ -1,43 +1,17 @@
 import styled from 'styled-components';
-import ArrowTriangleDown from '../../assets/icons/arrow_triangle_down.svg';
 import MyMakerlogs from './MyMakerlogs';
 import MyProducts from './MyProducts';
-import Link from 'next/link';
 import useModal from '../../hook/useModal';
 import CreateNewPostModal from '../modal/CreateNewPostModal';
-import PostTypeDropdownMenu from './PostTypeDropdownMenu';
-import { useRouter } from 'next/router';
+import MyPostsStickyHeader from './MypostsStickyHeader';
 
 const MyPosts = ({ postType, error, data, inView }) => {
   const [isModalOpen, onOpenModal, onCloseModal] = useModal();
-  const router = useRouter();
 
   return (
     <PostsContainer>
       <MyPostsStickyContainer $inView={inView}>
-        <div className='posts-header'>
-          <PostTypeDropdownMenu />
-          {/* <div className='title-wrapper'>
-            {postType === 'myMakerlogs' && '메이커로그'}
-            {postType === 'myProducts' && '프로덕트'}
-            <ArrowTriangleDownIcon />
-          </div> */}
-          <Link href={router.asPath}>
-            <a className='button' onClick={onOpenModal}>
-              새 포스트
-            </a>
-          </Link>
-        </div>
-        <div className='filters'>
-          <div className='filter'>
-            2021년
-            <ArrowTriangleDownIcon $isColor />
-          </div>
-          <div className='filter'>
-            전체
-            <ArrowTriangleDownIcon $isColor />
-          </div>
-        </div>
+        <MyPostsStickyHeader onOpenModal={onOpenModal} />
       </MyPostsStickyContainer>
       {postType === 'myMakerlogs' && <MyMakerlogs myMakerlogs={data} />}
       {postType === 'myProducts' && <MyProducts myProducts={data} />}
@@ -61,15 +35,6 @@ const PostsContainer = styled.div`
     justify-content: space-between;
     align-items: center;
   }
-
-  /* .title-wrapper {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1em;
-    cursor: pointer;
-  } */
 
   .button {
     display: flex;
@@ -122,10 +87,6 @@ const MyPostsStickyContainer = styled.div`
   transition: all 0.2s ease-in-out;
   border-bottom: ${({ $inView }) =>
     $inView ? '1px solid transparent' : '1px solid #ececee'};
-`;
-
-const ArrowTriangleDownIcon = styled(ArrowTriangleDown)`
-  fill: ${({ $isColor }) => ($isColor ? '#6d55ff' : '#c4c4c4')};
 `;
 
 export default MyPosts;
